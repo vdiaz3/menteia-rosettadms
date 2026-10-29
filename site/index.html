@@ -4,675 +4,834 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RosettaDMS · Todos tus dealers, cualquier DMS, un solo idioma</title>
-<meta name="description" content="RosettaDMS conecta a la marca con todos sus dealers sin importar su DMS. Conector por API cuando existe y por computer use cuando no. Un cerebro central concentra servicio, partes, inventario y citas, y los expone por API y MCP. Sin costo para el dealer.">
+<meta name="description" content="RosettaDMS conecta a la marca con todos sus dealers sin importar su DMS. Conector por API o por computer use, un cerebro central que concentra todo, MCP para agentes de IA y una capa de voz con Allo que contesta llamadas y mensajes. Sin costo para el dealer.">
 <meta property="og:title" content="RosettaDMS · Todos tus dealers, cualquier DMS, un solo idioma">
-<meta property="og:description" content="Integra cualquier DMS en minutos, sin modificar software y sin costo para el dealer. Cerebro central, agentes de IA y MCP.">
+<meta property="og:description" content="Integra cualquier DMS en minutos, sin modificar software y sin costo para el dealer. Cerebro central, agentes de IA, MCP y voz con Allo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rosettadms.menteia.com/">
-<meta name="theme-color" content="#f6821f">
+<meta name="theme-color" content="#003ffe">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Lexend:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --o:#f6821f; --o2:#fbad41; --o-d:#d9650a; --o-50:#fff6ee; --o-100:#ffe8d4;
-  --ink:#1b1b1f; --ink2:#36393f; --muted:#5f6470; --dim:#8a8f99;
-  --line:#e6e6e9; --line2:#d9dbe0; --bg:#ffffff; --soft:#f7f7f8; --navy:#0f1b2d;
-  --green:#16a34a; --green-50:#ecfdf3; --red:#dc2626; --red-50:#fef2f2; --amber:#b45309; --amber-50:#fffbeb; --blue:#2563eb; --blue-50:#eff6ff;
-  --r:16px; --max:1200px;
+  --y:#f3fb09; --b:#003ffe; --b2:#1f57ff; --navy:#071a5e;
+  --mist:#ebebeb; --mist2:#f5f5f5; --ink:#141414; --ink2:#2b2b2b; --muted:#555; --dim:#8a8a8a;
+  --line:#d6d6d6; --wl:rgba(255,255,255,.16);
+  --green:#0f9d58; --red:#e5372b; --amber:#c27c00;
+  --r:14px; --max:1240px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:#fff;color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-h1,h2,h3,h4,h5{font-family:Urbanist,Manrope,sans-serif;line-height:1.1;letter-spacing:-.02em;font-weight:800}
+h1,h2,h3,h4,h5{font-family:"Inter Tight",sans-serif;font-weight:600;line-height:1.05;letter-spacing:-.025em}
+.disp{font-family:"Titillium Web",sans-serif;font-weight:900;letter-spacing:-.02em;line-height:.85;text-transform:uppercase}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 .mono{font-family:"JetBrains Mono",monospace}
-.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.eyebrow{display:inline-block;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--o-d);font-weight:700;background:var(--o-50);border:1px solid var(--o-100);padding:5px 12px;border-radius:999px}
-section{padding:96px 0;position:relative}
-section.soft{background:var(--soft)}
-.sec-head{max-width:780px;margin-bottom:48px}
-.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
-.sec-head h2{font-size:clamp(2rem,4.4vw,3.1rem);margin:16px 0 14px}
-.sec-head p{color:var(--muted);font-size:1.1rem}
-.hl{color:var(--o)}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:10px;font-weight:700;font-size:.97rem;transition:.18s;border:1.5px solid transparent;cursor:pointer;font-family:Manrope}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter;flex:none}
+.code-tag{font-family:"JetBrains Mono";font-size:.68rem;letter-spacing:.06em;opacity:.6}
+.label{display:inline-flex;align-items:center;gap:10px;font-family:"JetBrains Mono";font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.label::before{content:"";width:8px;height:8px;background:currentColor}
+.hatch{background-image:repeating-linear-gradient(-45deg,currentColor 0 2px,transparent 2px 7px)}
+.grid-bg{background-image:linear-gradient(var(--wl) 1px,transparent 1px),linear-gradient(90deg,var(--wl) 1px,transparent 1px);background-size:124px 124px}
+section{padding:110px 0;position:relative}
+.sec-head{max-width:820px;margin-bottom:56px}
+.sec-head h2{font-size:clamp(2.2rem,5vw,3.8rem);margin:18px 0 18px}
+.sec-head p{font-size:1.12rem;color:var(--muted);max-width:720px}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:15px 22px;font-weight:600;font-size:.98rem;transition:.15s;border:1.5px solid transparent;cursor:pointer;font-family:"Inter Tight";border-radius:4px}
 .btn .ico{width:18px;height:18px}
-.btn-o{background:var(--o);color:#fff}
-.btn-o:hover{background:var(--o-d)}
-.btn-line{border-color:var(--line2);color:var(--ink);background:#fff}
-.btn-line:hover{border-color:var(--o);color:var(--o-d)}
+.btn-y{background:var(--y);color:var(--ink)}
+.btn-y:hover{background:#fff}
+.btn-b{background:var(--b);color:#fff}
+.btn-b:hover{background:var(--ink)}
+.btn-wl{border-color:rgba(255,255,255,.6);color:#fff}
+.btn-wl:hover{background:#fff;color:var(--b)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:#fff}
 
-/* nav */
-.topbar{background:var(--navy);color:#cfd6e4;font-size:.84rem;text-align:center;padding:8px 16px}
-.topbar a{color:var(--o2);font-weight:700}
-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+/* brand lockup */
+.logo{display:inline-flex;align-items:center;gap:10px;color:var(--ink)}
+.logo .mk{width:34px;height:37px;flex:none}
+.logo .wm{display:flex;flex-direction:column;line-height:.9}
+.logo .wm b{font-family:Lexend,sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:-.035em}
+.logo .wm small{font-family:Lexend,sans-serif;font-weight:500;font-size:.56rem;letter-spacing:.6em;display:flex;align-items:center;justify-content:flex-end;margin-top:3px;margin-right:-.6em}
+.logo .wm small::before{content:"";width:14px;height:3px;background:var(--y);margin-right:auto}
+.logo.on-dark{color:#fff}
+.logo.lg .mk{width:46px;height:50px}.logo.lg .wm b{font-size:2rem}.logo.lg .wm small{font-size:.7rem}
+
+/* topbar + nav */
+.topbar{background:var(--y);color:var(--ink);font-size:.84rem;font-weight:500}
+.topbar .wrap{display:flex;align-items:center;justify-content:center;gap:16px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap;text-align:center}
+.topbar a{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1.5px solid var(--ink)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
-.logo{display:flex;align-items:center;gap:10px;font-family:Urbanist;font-weight:800;font-size:1.32rem;letter-spacing:-.02em}
-.logo svg{width:32px;height:32px}
-.logo b{color:var(--o)}
-.nav-links{display:flex;gap:26px;font-size:.94rem;font-weight:600;color:var(--ink2)}
-.nav-links a:hover{color:var(--o-d)}
-@media(max-width:960px){.nav-links{display:none}}
+.nav-links{display:flex;gap:24px;font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--b)}
+@media(max-width:1000px){.nav-links{display:none}}
 
-/* hero */
-.hero{padding:76px 0 70px;overflow:hidden;position:relative;background:linear-gradient(180deg,#fff 0%,var(--o-50) 100%)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;position:relative}
-@media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
-.hero h1{font-size:clamp(2.6rem,6vw,4.5rem);margin:20px 0 22px;font-weight:800}
-.hero p.lead{font-size:1.18rem;color:var(--muted);max-width:590px}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 30px}
-.checks{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.93rem;font-weight:600;color:var(--ink2)}
-.checks span{display:inline-flex;align-items:center;gap:8px}
-.checks .ico{width:18px;height:18px;color:var(--o);stroke-width:2.4}
-.hero-art{position:relative}
-.hero-art svg{width:100%;height:auto;display:block}
-.pulse-dot{animation:pd 2.4s ease-in-out infinite}
-@keyframes pd{0%,100%{opacity:.35}50%{opacity:1}}
-.flow{stroke-dasharray:5 7;animation:flow 1.3s linear infinite}
+/* HERO */
+.hero{background:var(--b);color:#fff;padding:64px 0 0;overflow:hidden}
+.hero .tags{display:flex;justify-content:space-between;gap:12px;margin-bottom:30px}
+@media(max-width:560px){.hero .tags span:nth-child(2){display:none}}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:end}
+@media(max-width:1060px){.hero-grid{grid-template-columns:1fr}}
+.hero-mark{display:flex;align-items:flex-end;gap:18px}
+.hero-mark svg{width:clamp(96px,14vw,150px);height:auto;flex:none}
+.hero-word{font-family:Lexend,sans-serif;font-weight:700;letter-spacing:-.05em;line-height:.8;font-size:clamp(3.6rem,10vw,7.6rem);color:#fff}
+.hero-word small{display:flex;align-items:center;justify-content:flex-end;font-weight:500;font-size:.28em;letter-spacing:.6em;margin-top:.35em;margin-right:-.6em}
+.hero-word small::before{content:"";width:.9em;height:.16em;background:var(--y);margin-right:auto}
+.hero h1{font-size:clamp(1.9rem,3.4vw,2.8rem);font-weight:500;margin:34px 0 18px;max-width:600px}
+.hero p.lead{font-size:1.1rem;color:rgba(255,255,255,.84);max-width:560px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 0}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;padding-bottom:56px}
+@media(max-width:760px){.trio{grid-template-columns:1fr}}
+.tcard{border-radius:var(--r);padding:20px;min-height:430px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+@media(max-width:760px){.tcard{min-height:auto}}
+.tcard .th{display:flex;justify-content:space-between;align-items:center}
+.tcard .th svg{width:22px;height:24px}
+.tcard .tl{font-weight:600;font-size:.88rem;margin:22px 0 0;padding-bottom:10px;border-bottom:1.5px solid currentColor}
+.tcard h3{font-size:1.65rem;font-weight:500;margin:16px 0 0}
+.tcard .num{font-family:"Titillium Web";font-weight:700;font-size:3.6rem;line-height:1;letter-spacing:-.03em;margin-top:auto}
+.tcard .nl{font-weight:600;font-size:.9rem}
+.tc-y{background:var(--y);color:var(--ink)}
+.tc-b{background:var(--b2);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.tc-w{background:#fff;color:var(--ink);padding-right:52px}
+.tc-y .foot{margin:16px -20px -20px;background:var(--ink);color:var(--y);display:flex;justify-content:space-between;padding:13px 20px;font-weight:600;font-size:.86rem}
+.iso{width:100%;height:auto;margin-top:10px}
+.heat{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:6px}
+.heat i{aspect-ratio:1;border-radius:2px}
+.heat-l{display:flex;justify-content:space-between;font-family:"JetBrains Mono";font-size:.6rem;opacity:.75;margin-top:5px}
+.vstats{display:grid;gap:14px;margin-top:14px;flex:1}
+.vs{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center}
+.vs .bars{height:52px;background:repeating-linear-gradient(180deg,var(--b) 0 var(--h,3px),transparent var(--h,3px) 7px)}
+.vs b{font-family:"Titillium Web";font-weight:700;font-size:1.9rem;line-height:1;display:block}
+.vs span{font-size:.76rem;font-weight:500;color:var(--muted)}
+.tc-w .side{position:absolute;right:0;top:0;bottom:0;width:38px;background:var(--y);display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:12px}
+.tc-w .side .hatch{width:22px;height:46px;color:var(--ink)}
+.tc-w .side .stripe{flex:1;width:100%;background:repeating-linear-gradient(135deg,var(--b) 0 12px,var(--y) 12px 24px)}
+.hero-strip{border-top:1px solid var(--wl);padding:18px 0;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:.86rem;color:rgba(255,255,255,.8)}
+.hero-strip b{color:var(--y);font-family:"JetBrains Mono";font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+.dmsb{font-family:"JetBrains Mono";font-size:.76rem;border:1px solid rgba(255,255,255,.35);padding:5px 10px}
+
+/* PROBLEM */
+.problem{background:var(--y);overflow:hidden}
+.problem .giant{font-size:clamp(4.5rem,17vw,15rem);color:var(--ink);margin:10px 0 40px -6px;white-space:nowrap}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:940px){.cards3{grid-template-columns:1fr}}
+.pc{border-radius:var(--r);padding:28px;display:flex;flex-direction:column}
+.pc .who{font-family:"JetBrains Mono";font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.pc h3{font-size:1.7rem;margin:12px 0 18px}
+.pc ul{list-style:none;display:grid;gap:10px;flex:1}
+.pc li{font-size:.95rem;padding-left:22px;position:relative}
+.pc li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:2px;background:currentColor}
+.pc .q{margin-top:22px;padding-top:16px;border-top:1.5px solid currentColor;font-size:.95rem;font-weight:500}
+.pc-w{background:#fff}.pc-w li{color:var(--ink2)}
+.pc-b{background:var(--b);color:#fff}
+.pc-k{background:var(--ink);color:#fff}.pc-k .who{color:var(--y)}
+
+/* HOW */
+.conn{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:940px){.conn{grid-template-columns:1fr}}
+.cc{border-radius:var(--r);padding:32px;position:relative;overflow:hidden}
+.cc .num{position:absolute;right:20px;top:4px;font-size:7rem;opacity:.12}
+.cc h3{font-size:2rem;margin:16px 0 12px;max-width:440px}
+.cc p{font-size:1rem;max-width:520px}
+.cc ol{list-style:none;counter-reset:c;display:grid;gap:12px;margin-top:22px}
+.cc ol li{counter-increment:c;display:grid;grid-template-columns:34px 1fr;gap:10px;font-size:.95rem}
+.cc ol li::before{content:"0" counter(c);font-family:"JetBrains Mono";font-weight:700;font-size:.8rem;padding-top:2px}
+.cc .when{margin-top:24px;padding-top:16px;border-top:1.5px solid currentColor;font-size:.9rem}
+.cc-b{background:var(--b);color:#fff}.cc-b p{color:rgba(255,255,255,.85)}
+.cc-y{background:var(--y);color:var(--ink)}
+.hyb{margin-top:16px;background:var(--ink);color:#fff;border-radius:var(--r);padding:26px 30px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+@media(max-width:760px){.hyb{grid-template-columns:1fr}}
+.hyb .sq{width:56px;height:56px;background:var(--y);color:var(--ink);display:grid;place-items:center}
+.hyb h4{font-size:1.35rem;margin-bottom:6px}
+.hyb p{color:#c9c9c9;font-size:.95rem}
+.hyb .hatch{width:90px;height:56px;color:var(--y)}
+@media(max-width:760px){.hyb .hatch{display:none}}
+.arch{margin-top:56px;border:1.5px solid var(--ink);border-radius:var(--r) var(--r) 0 0;padding:24px;overflow-x:auto;background:#fff}
+.arch svg{width:100%;min-width:920px;height:auto;display:block}
+.flow{stroke-dasharray:6 6;animation:flow 1.2s linear infinite}
 .flow.rev{animation-direction:reverse}
 @keyframes flow{to{stroke-dashoffset:-24}}
-
-/* stats strip */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);background:#fff;margin-top:56px;overflow:hidden}
-@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
-.stat{padding:22px 24px;border-right:1px solid var(--line)}
-.stat:last-child{border-right:0}
-@media(max-width:760px){.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-.stat b{font-family:Urbanist;font-size:2rem;font-weight:800;display:block;color:var(--o)}
-.stat span{font-size:.88rem;color:var(--muted);font-weight:600}
-
-/* dms strip */
-.strip{padding:26px 0;border-bottom:1px solid var(--line)}
-.strip .wrap{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap;justify-content:center;color:var(--muted);font-size:.9rem}
-.strip b{color:var(--ink);font-weight:700}
-.dmsbadge{font-family:"JetBrains Mono";font-size:.8rem;border:1px solid var(--line2);padding:6px 12px;border-radius:8px;color:var(--ink2);background:#fff}
-
-/* pain */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.grid3{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px}
-.pain .who{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--o-d)}
-.pain h3{font-size:1.45rem;margin:8px 0 16px}
-.pain ul{list-style:none;display:grid;gap:11px}
-.pain li{color:var(--muted);font-size:.95rem;padding-left:24px;position:relative}
-.pain li::before{content:"";position:absolute;left:2px;top:9px;width:10px;height:2px;background:var(--red);transform:rotate(45deg)}
-.pain li::after{content:"";position:absolute;left:2px;top:9px;width:10px;height:2px;background:var(--red);transform:rotate(-45deg)}
-.quote{margin-top:20px;padding:14px 16px;border-left:3px solid var(--o);background:var(--o-50);border-radius:0 10px 10px 0;font-style:italic;color:var(--ink2);font-size:.93rem}
-
-/* how: connectors */
-.conn{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:900px){.conn{grid-template-columns:1fr}}
-.conn .card{padding:32px;position:relative;overflow:hidden}
-.conn .badge{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:7px}
-.badge.api{background:var(--blue-50);color:var(--blue)}
-.badge.cu{background:var(--o-50);color:var(--o-d)}
-.conn h3{font-size:1.6rem;margin:14px 0 10px}
-.conn p{color:var(--muted)}
-.conn ol{list-style:none;counter-reset:c;display:grid;gap:12px;margin-top:20px}
-.conn ol li{counter-increment:c;display:grid;grid-template-columns:30px 1fr;gap:12px;font-size:.94rem;color:var(--ink2)}
-.conn ol li::before{content:counter(c);width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:.82rem;background:var(--soft);border:1px solid var(--line);color:var(--ink)}
-.conn .when{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line2);font-size:.88rem;color:var(--muted)}
-.conn .when b{color:var(--ink)}
-.decide{margin-top:20px;background:var(--navy);color:#e6ebf5;border-radius:var(--r);padding:26px 30px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
-@media(max-width:700px){.decide{grid-template-columns:1fr}}
-.decide .ico{width:40px;height:40px;color:var(--o2)}
-.decide h4{font-size:1.25rem;color:#fff;margin-bottom:6px}
-.decide p{color:#b9c3d6;font-size:.95rem}
-
-/* brain architecture */
-.arch{margin-top:64px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;overflow-x:auto}
-.arch svg{width:100%;min-width:900px;height:auto;display:block}
-.layers{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:20px}
+.layers{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid var(--ink);border-top:0;border-radius:0 0 var(--r) var(--r);overflow:hidden}
 @media(max-width:1000px){.layers{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.layers{grid-template-columns:1fr}}
-.layer{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
-.layer .n{font-family:"JetBrains Mono";font-size:.78rem;color:var(--o-d);font-weight:500}
-.layer h4{font-size:1.1rem;margin:6px 0 6px}
+.layer{padding:22px;border-right:1px solid var(--line);background:#fff}
+.layer:last-child{border-right:0}
+.layer .n{font-family:"JetBrains Mono";font-size:.72rem;font-weight:700;color:var(--b)}
+.layer h4{font-size:1.15rem;margin:8px 0 6px}
 .layer p{font-size:.88rem;color:var(--muted)}
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:2px solid var(--ink)}
+@media(max-width:900px){.steps4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.steps4{grid-template-columns:1fr}}
+.st{padding:22px 22px 0 0}
+.st .t{font-family:"JetBrains Mono";font-size:.74rem;font-weight:700;background:var(--b);color:#fff;padding:3px 8px;display:inline-block}
+.st h4{font-size:1.15rem;margin:14px 0 6px}
+.st p{font-size:.92rem;color:var(--muted)}
 
-/* onboarding timeline */
-.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden}
-@media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.timeline{grid-template-columns:1fr}}
-.tl{padding:24px;border-right:1px solid var(--line);position:relative}
-.tl:last-child{border-right:0}
-.tl .time{font-family:"JetBrains Mono";font-size:.78rem;color:#fff;background:var(--o);display:inline-block;padding:3px 8px;border-radius:6px}
-.tl h4{font-size:1.08rem;margin:12px 0 6px}
-.tl p{font-size:.9rem;color:var(--muted)}
-
-/* features bento */
-.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+/* FEATURES */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:980px){.bento{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.bento{grid-template-columns:1fr}}
-.feat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:.2s}
-.feat:hover{border-color:var(--o);box-shadow:0 12px 30px -18px rgba(246,130,31,.55);transform:translateY(-2px)}
-.feat .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--o-50);color:var(--o-d);margin-bottom:16px}
-.feat h4{font-size:1.15rem;margin-bottom:8px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:.15s;position:relative}
+.feat:hover{background:var(--y);border-color:var(--y)}
+.feat .ic{width:44px;height:44px;background:var(--b);color:#fff;display:grid;place-items:center;margin-bottom:18px}
+.feat h4{font-size:1.18rem;margin-bottom:8px}
 .feat p{color:var(--muted);font-size:.93rem}
-.tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-bottom:12px;float:right}
-.t-core{background:var(--o-50);color:var(--o-d)}.t-svc{background:var(--green-50);color:var(--green)}.t-sales{background:var(--blue-50);color:var(--blue)}.t-brand{background:#f3f0ff;color:#6d28d9}
+.feat:hover p{color:var(--ink2)}
+.ftag{position:absolute;top:22px;right:22px;font-family:"JetBrains Mono";font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 
-/* MCP / AI */
-.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+/* ALLO */
+.voice{background:var(--b);color:#fff;overflow:hidden}
+.voice .sec-head p{color:rgba(255,255,255,.85)}
+.partner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.partner img{height:40px;width:auto}
+.partner .x{font-family:"JetBrains Mono";opacity:.7;font-size:1.2rem}
+.partner .pl{font-family:"JetBrains Mono";font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.4);padding:5px 9px}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:980px){.vgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.vgrid{grid-template-columns:1fr}}
+.vc{background:#fff;color:var(--ink);border-radius:var(--r);padding:24px}
+.vc.hl{background:var(--y)}
+.vc .ic{width:44px;height:44px;background:var(--ink);color:var(--y);display:grid;place-items:center;margin-bottom:16px}
+.vc h4{font-size:1.2rem;margin-bottom:8px}
+.vc p{font-size:.93rem;color:var(--ink2)}
+.callflow{display:grid;grid-template-columns:repeat(5,1fr);margin-top:48px;border:1px solid rgba(255,255,255,.35)}
+@media(max-width:980px){.callflow{grid-template-columns:1fr}}
+.cf{padding:20px;border-right:1px solid rgba(255,255,255,.25)}
+.cf:last-child{border-right:0}
+@media(max-width:980px){.cf{border-right:0;border-bottom:1px solid rgba(255,255,255,.25)}}
+.cf .n{font-family:"Titillium Web";font-weight:700;font-size:2.4rem;color:var(--y);line-height:1}
+.cf h5{font-size:1.02rem;margin:10px 0 6px}
+.cf p{font-size:.86rem;color:rgba(255,255,255,.8)}
+.cf .who{font-family:"JetBrains Mono";font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.vsplit{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:980px){.vsplit{grid-template-columns:1fr}}
+.call{background:var(--navy);border-radius:var(--r);padding:22px;min-height:440px;display:flex;flex-direction:column}
+.call-h{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:14px;gap:12px}
+.call-h b{font-size:1rem}
+.call-h small{display:block;font-family:"JetBrains Mono";font-size:.7rem;opacity:.7}
+.wave{display:flex;gap:3px;align-items:center;height:24px}
+.wave i{width:3px;background:var(--y);animation:wv 1s ease-in-out infinite}
+.wave i:nth-child(2n){animation-delay:.2s}.wave i:nth-child(3n){animation-delay:.4s}
+@keyframes wv{0%,100%{height:5px}50%{height:22px}}
+.lines{display:flex;flex-direction:column;gap:10px;font-size:.9rem;flex:1}
+.ln{opacity:0;transform:translateY(6px);animation:in .35s forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.ln .sp{font-family:"JetBrains Mono";font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:2px}
+.ln.ai .sp{color:var(--y)}.ln.cu .sp{color:#9db6ff}
+.ln .tool{display:inline-block;margin-top:6px;font-family:"JetBrains Mono";font-size:.72rem;background:rgba(243,251,9,.12);border:1px solid rgba(243,251,9,.45);color:var(--y);padding:3px 8px}
+.ready{background:#fff;color:var(--ink);border-radius:var(--r);padding:26px;display:flex;flex-direction:column}
+.ready h4{font-size:1.4rem;margin-bottom:6px}
+.ready > p{color:var(--muted);font-size:.93rem}
+.ready ul{list-style:none;margin:16px 0;display:grid;gap:10px}
+.ready li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.92rem}
+.ready li .ico{width:18px;height:18px;color:var(--b);stroke-width:2.6;margin-top:2px}
+.ready code{font-family:"JetBrains Mono";font-size:.8rem;background:var(--mist);padding:1px 6px}
+.ready .note{margin-top:16px;font-size:.8rem;color:var(--dim);border-top:1px solid var(--line);padding-top:12px}
+.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:900px){.videos{grid-template-columns:1fr}}
+.vid{background:var(--navy);border-radius:var(--r);overflow:hidden}
+.vid .frame{position:relative;aspect-ratio:16/9;background:#000;cursor:pointer}
+.vid .frame img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:.2s}
+.vid .frame:hover img{opacity:1}
+.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:var(--y);display:grid;place-items:center}
+.vid .play svg{width:22px;height:22px;fill:var(--ink);margin-left:3px}
+.vid .cap{padding:16px 18px}
+.vid .cap b{display:block;font-size:1rem}
+.vid .cap span{font-size:.84rem;color:rgba(255,255,255,.75)}
+.vid .cap small{display:block;margin-top:8px;font-family:"JetBrains Mono";font-size:.66rem;opacity:.6;letter-spacing:.06em}
+
+/* AI / MCP */
+.ai{background:var(--mist)}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:980px){.ai-grid{grid-template-columns:1fr}}
-.code{background:var(--navy);color:#d5ddeb;border-radius:var(--r);padding:22px;font-family:"JetBrains Mono";font-size:.8rem;line-height:1.7;overflow-x:auto;white-space:pre}
-.code .k{color:var(--o2)}.code .s{color:#86efac}.code .c{color:#7d8aa3}.code .n{color:#93c5fd}
-.tools{display:grid;gap:10px;margin-top:18px}
-.tool{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
-.tool code{font-family:"JetBrains Mono";font-size:.82rem;color:var(--o-d);font-weight:500}
+.box{background:#fff;border-radius:var(--r);padding:26px}
+.box h3{font-size:1.5rem}
+.box > p{color:var(--muted);margin-top:6px;font-size:.95rem}
+.tools{display:grid;gap:8px;margin-top:18px}
+.tool{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:12px 14px;border:1px solid var(--line);align-items:start}
+.tool .ico{width:18px;height:18px;color:var(--b);margin-top:2px}
+.tool code{font-family:"JetBrains Mono";font-size:.82rem;font-weight:700;color:var(--b)}
 .tool span{display:block;font-size:.86rem;color:var(--muted)}
-.tool .ico{color:var(--o);margin-top:2px;width:18px;height:18px}
-.auto-list{display:grid;gap:10px;margin-top:18px}
-.rule{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:.9rem}
-.rule .if,.rule .then{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:5px;height:fit-content}
-.rule .if{background:var(--soft);color:var(--ink2);border:1px solid var(--line)}
-.rule .then{background:var(--o);color:#fff}
+.code{background:var(--ink);color:#d9d9d9;border-radius:var(--r);padding:22px;font-family:"JetBrains Mono";font-size:.78rem;line-height:1.7;overflow-x:auto;white-space:pre}
+.code .k{color:var(--y)}.code .s{color:#8fb0ff}.code .c{color:#7b7b7b}.code .n{color:#fff}
+.rules{display:grid;gap:8px;margin-top:16px}
+.rl{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;padding:14px;border:1px solid var(--line);font-size:.9rem}
+.rl .if,.rl .th{font-family:"JetBrains Mono";font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;height:fit-content}
+.rl .if{background:var(--mist)}.rl .th{background:var(--b);color:#fff}
 
 /* complaints */
-.ctable{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ctable{width:100%;border-collapse:collapse;border:1.5px solid var(--ink)}
 .ctable th,.ctable td{padding:16px 20px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.95rem}
-.ctable th{background:var(--soft);font-family:Urbanist;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.ctable tr:last-child td{border-bottom:0}
-.ctable td:first-child{color:var(--ink2);font-style:italic;width:38%}
-.ctable td:nth-child(2) b{color:var(--o-d)}
-.ctable .area{display:block;font-style:normal;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:800;margin-bottom:4px}
+.ctable th{background:var(--b);color:#fff;font-family:"JetBrains Mono";font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.ctable td:first-child{width:38%;font-weight:500}
+.ctable tr:hover td{background:var(--y)}
+.ctable td:nth-child(2) b{color:var(--b)}
+.ctable tr:hover td:nth-child(2) b{color:var(--ink)}
+.ctable .area{display:block;font-family:"JetBrains Mono";font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:4px}
 @media(max-width:700px){.ctable thead{display:none}.ctable tr{display:block;border-bottom:1px solid var(--line)}.ctable td{display:block;width:100%!important;border:0;padding:10px 18px}.ctable td:first-child{padding-top:18px}.ctable td:last-child{padding-bottom:18px}}
 
-/* DEMO dashboard */
-.demo-shell{background:#fff;border:1px solid var(--line2);border-radius:20px;box-shadow:0 30px 70px -40px rgba(15,27,45,.45);overflow:hidden}
-.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--navy);color:#cfd6e4;font-size:.82rem;flex-wrap:wrap}
-.demo-bar .dots{display:flex;gap:6px}.demo-bar .dots i{width:10px;height:10px;border-radius:50%;background:#33415a}
-.demo-bar .dots i:first-child{background:var(--o)}
-.live{display:inline-flex;align-items:center;gap:7px;color:#4ade80;font-weight:700}
-.live::before{content:"";width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pd 1.6s infinite}
-.demo-body{padding:20px}
-.demo-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:16px}
-.seg{display:inline-flex;border:1px solid var(--line2);border-radius:10px;overflow:hidden;flex-wrap:wrap}
-.seg button{background:#fff;border:0;padding:8px 13px;font:600 .84rem Manrope;color:var(--ink2);cursor:pointer;border-right:1px solid var(--line)}
+/* DEMO */
+.demo{background:var(--mist)}
+.shell{background:#fff;border:1.5px solid var(--ink);border-radius:var(--r);overflow:hidden}
+.shell-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--ink);color:#d9d9d9;font-size:.8rem;flex-wrap:wrap}
+.shell-bar .sq{display:flex;gap:6px}.shell-bar .sq i{width:10px;height:10px;background:#444}.shell-bar .sq i:first-child{background:var(--y)}.shell-bar .sq i:nth-child(2){background:var(--b)}
+.live{display:inline-flex;align-items:center;gap:7px;color:var(--y);font-family:"JetBrains Mono";font-size:.74rem;font-weight:700}
+.live::before{content:"";width:8px;height:8px;background:var(--y);animation:bl 1.4s infinite}
+@keyframes bl{50%{opacity:.25}}
+.shell-body{padding:18px}
+.tools-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-bottom:14px}
+.seg{display:inline-flex;border:1.5px solid var(--ink);flex-wrap:wrap}
+.seg button{background:#fff;border:0;border-right:1px solid var(--line);padding:8px 12px;font:600 .82rem "Inter Tight";color:var(--ink);cursor:pointer}
 .seg button:last-child{border-right:0}
-.seg button.on{background:var(--o);color:#fff}
-.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
-@media(max-width:1000px){.kpis{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:520px){.kpis{grid-template-columns:1fr 1fr}}
-.kpi{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.kpi small{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
-.kpi div{font-family:Urbanist;font-size:1.55rem;font-weight:800;margin-top:2px}
-.kpi em{font-style:normal;font-size:.74rem;font-weight:700;color:var(--green)}
+.seg button.on{background:var(--b);color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(7,1fr);border:1.5px solid var(--ink);margin-bottom:14px}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{padding:12px 14px;border-right:1px solid var(--line)}
+.kpi:last-child{border-right:0}
+@media(max-width:1100px){.kpi{border-bottom:1px solid var(--line)}}
+.kpi small{font-family:"JetBrains Mono";font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.kpi div{font-family:"Titillium Web";font-size:1.9rem;font-weight:700;line-height:1.1}
+.kpi em{font-style:normal;font-size:.72rem;font-weight:600;color:var(--green)}
 .kpi em.bad{color:var(--red)}
-.demo-main{display:grid;grid-template-columns:1.55fr 1fr;gap:16px}
-@media(max-width:1060px){.demo-main{grid-template-columns:1fr}}
-.panel{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.panel-h{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:800;font-size:.9rem;font-family:Urbanist;gap:10px}
-.panel-h small{font-family:Manrope;font-weight:600;color:var(--dim);font-size:.76rem}
-.tbl-wrap{overflow-x:auto}
-table.dl{width:100%;border-collapse:collapse;font-size:.83rem;min-width:700px}
-table.dl th{text-align:left;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:9px 12px;border-bottom:1px solid var(--line);background:var(--soft);font-weight:800;white-space:nowrap}
-table.dl td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
-table.dl tbody tr{cursor:pointer;transition:background .12s}
-table.dl tbody tr:hover{background:var(--o-50)}
-table.dl tbody tr.sel{background:var(--o-50);box-shadow:inset 3px 0 0 var(--o)}
-.dn b{display:block;font-weight:700}
-.dn span{font-size:.74rem;color:var(--dim)}
-.pill{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:999px}
-.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
-.p-ok{background:var(--green-50);color:var(--green)}.p-warn{background:var(--amber-50);color:var(--amber)}.p-bad{background:var(--red-50);color:var(--red)}
-.ct{font-size:.7rem;font-weight:800;padding:3px 7px;border-radius:5px;letter-spacing:.04em}
-.ct-api{background:var(--blue-50);color:var(--blue)}.ct-cu{background:var(--o-50);color:var(--o-d)}.ct-hy{background:#f3f0ff;color:#6d28d9}
-.mini{display:inline-block;width:56px;height:6px;border-radius:4px;background:var(--soft);vertical-align:middle;margin-right:6px;overflow:hidden;border:1px solid var(--line)}
-.mini i{display:block;height:100%;background:var(--o)}
-.detail{padding:16px}
-.detail h4{font-size:1.25rem}
-.detail .meta{font-size:.82rem;color:var(--muted);margin:2px 0 14px}
-.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.dgrid div{background:var(--soft);border-radius:10px;padding:10px}
-.dgrid small{font-size:.66rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:800}
-.dgrid b{display:block;font-family:Urbanist;font-size:1.25rem}
-.chart{margin:4px 0 14px}
-.chart svg{width:100%;height:110px;display:block}
-.sub{font-size:.74rem;font-weight:800;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin:12px 0 8px}
+.kpi.hlk{background:var(--y)}
+.dm{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+@media(max-width:1100px){.dm{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);background:#fff;overflow:hidden;min-width:0}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);font-weight:700;font-size:.9rem;gap:10px}
+.ph small{font-family:"JetBrains Mono";font-weight:500;color:var(--dim);font-size:.68rem;letter-spacing:.04em}
+.tbl{overflow-x:auto}
+table.dl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:780px}
+table.dl th{text-align:left;font-family:"JetBrains Mono";font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:9px 10px;border-bottom:1.5px solid var(--ink);font-weight:700;white-space:nowrap}
+table.dl td{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.dl tbody tr{cursor:pointer}
+table.dl tbody tr:hover{background:var(--mist2)}
+table.dl tbody tr.sel{background:var(--y)}
+.dn b{display:block;font-weight:600}
+.dn span{font-size:.72rem;color:var(--dim);font-family:"JetBrains Mono"}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;font-family:"JetBrains Mono"}
+.pill::before{content:"";width:7px;height:7px;background:currentColor}
+.p-ok{color:var(--green)}.p-warn{color:var(--amber)}.p-bad{color:var(--red)}
+.ct{font-family:"JetBrains Mono";font-size:.66rem;font-weight:700;padding:2px 6px;letter-spacing:.03em;white-space:nowrap}
+.ct-api{background:var(--b);color:#fff}.ct-cu{background:var(--y);color:var(--ink)}.ct-hy{background:var(--ink);color:#fff}.ct-allo{background:#fde68a;color:#002c2a}
+.mini{display:inline-block;width:50px;height:6px;background:var(--mist);vertical-align:middle;margin-right:6px}
+.mini i{display:block;height:100%;background:var(--b)}
+.detail{padding:14px}
+.detail h4{font-size:1.35rem}
+.detail .meta{font-size:.8rem;color:var(--muted);margin:3px 0 14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.dg{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);margin-bottom:12px}
+.dg div{padding:9px;border-right:1px solid var(--line)}
+.dg div:last-child{border-right:0}
+.dg small{font-family:"JetBrains Mono";font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700;display:block}
+.dg b{font-family:"Titillium Web";font-size:1.3rem}
+.sub{font-family:"JetBrains Mono";font-size:.64rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 7px}
+.chart svg{width:100%;height:96px;display:block}
 .parts{display:grid;gap:6px}
-.part{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:.82rem;padding:8px 10px;border:1px solid var(--line);border-radius:9px}
-.part span{color:var(--muted);font-size:.76rem;display:block}
-.jit{margin-top:12px;padding:12px;border-radius:10px;background:var(--o-50);border:1px solid var(--o-100);font-size:.84rem;color:var(--ink2)}
-.jit b{color:var(--o-d)}
-.demo-low{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
-@media(max-width:1060px){.demo-low{grid-template-columns:1fr}}
-.feed{height:260px;overflow:hidden;padding:6px 0;font-size:.8rem}
-.ev{display:grid;grid-template-columns:58px auto 1fr;gap:8px;padding:7px 14px;align-items:start;border-bottom:1px solid var(--soft);animation:evin .4s ease}
-@keyframes evin{from{opacity:0;transform:translateY(-6px)}}
-.ev time{font-family:"JetBrains Mono";color:var(--dim);font-size:.72rem}
-.ev p{color:var(--ink2)}
+.part{font-size:.82rem;padding:8px 10px;border-left:3px solid var(--b);background:var(--mist2)}
+.part span{display:block;color:var(--muted);font-size:.76rem}
+.jit{margin-top:12px;padding:12px;background:var(--b);color:#fff;font-size:.84rem}
+.jit b{color:var(--y)}
+.dl2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:900px){.dl2{grid-template-columns:1fr}}
+.hm{padding:14px;overflow-x:auto}
+.hm-grid{display:grid;grid-template-columns:120px repeat(12,minmax(14px,1fr));gap:3px;align-items:center;min-width:360px}
+.hm-grid i{aspect-ratio:1.6;display:block}
+.hm-grid span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);font-size:.72rem}
+.hm-leg{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:.72rem;color:var(--muted)}
+.hm-leg i{display:inline-block;width:14px;height:10px;margin-right:4px;vertical-align:middle}
+.feed{height:270px;overflow:hidden;font-size:.8rem}
+.ev{display:grid;grid-template-columns:62px auto 1fr;gap:8px;padding:7px 14px;align-items:start;border-bottom:1px solid var(--mist2);animation:in .35s}
+.ev time{font-family:"JetBrains Mono";color:var(--dim);font-size:.7rem}
 .ask{padding:14px}
-.ask .qs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.ask .qs button{border:1px solid var(--line2);background:#fff;border-radius:999px;padding:6px 11px;font:600 .76rem Manrope;color:var(--ink2);cursor:pointer;text-align:left}
-.ask .qs button:hover,.ask .qs button.on{border-color:var(--o);color:var(--o-d);background:var(--o-50)}
-.answer{background:var(--soft);border-radius:10px;padding:12px;font-size:.84rem;color:var(--ink2);min-height:150px}
-.answer b{color:var(--ink)}
+.qs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.qs button{border:1.5px solid var(--ink);background:#fff;padding:6px 10px;font:600 .76rem "Inter Tight";cursor:pointer;text-align:left}
+.qs button:hover,.qs button.on{background:var(--ink);color:#fff}
+.answer{background:var(--mist2);padding:12px;font-size:.84rem;min-height:150px;border-left:3px solid var(--y)}
 .answer ol{padding-left:18px;margin-top:6px}
-.mcp-log{font-family:"JetBrains Mono";font-size:.74rem;background:var(--navy);color:#cfd6e4;padding:14px;height:260px;overflow:hidden;line-height:1.6}
-.mcp-log .k{color:var(--o2)}.mcp-log .s{color:#86efac}.mcp-log .c{color:#7d8aa3}
-.demo-note{font-size:.76rem;color:var(--dim);margin-top:14px;text-align:center}
+.mcp{font-family:"JetBrains Mono";font-size:.72rem;background:var(--ink);color:#d0d0d0;padding:14px;height:270px;overflow:hidden;line-height:1.6;word-break:break-word}
+.mcp .k{color:var(--y)}.mcp .s{color:#8fb0ff}.mcp .c{color:#777}
+.dnote{font-family:"JetBrains Mono";font-size:.7rem;color:var(--dim);margin-top:14px;text-align:center}
 
-/* value */
-.aud .card{border-top:4px solid var(--o)}
-.aud h3{font-size:1.5rem;margin:12px 0 16px}
-.aud ul{list-style:none;display:grid;gap:10px}
-.aud li{padding-left:26px;position:relative;color:var(--muted);font-size:.95rem}
-.aud li::before{content:"";position:absolute;left:3px;top:6px;width:6px;height:11px;border:solid var(--o);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
-.price{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-family:Urbanist;font-size:1.6rem;font-weight:800}
-.price small{display:block;font-family:Manrope;font-size:.82rem;color:var(--dim);font-weight:500}
+/* VALUE */
+.vtrio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:940px){.vtrio{grid-template-columns:1fr}}
+.vt{border-radius:var(--r);padding:28px;display:flex;flex-direction:column;min-height:440px;overflow:hidden}
+.vt .lbl{font-family:"JetBrains Mono";font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.vt h3{font-size:2rem;margin:14px 0 18px;font-weight:500}
+.vt ul{list-style:none;display:grid;gap:9px}
+.vt li{padding-left:20px;position:relative;font-size:.95rem}
+.vt li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;background:currentColor}
+.vt .big{font-family:"Titillium Web";font-weight:700;font-size:3.4rem;line-height:1;margin-top:auto;padding-top:24px}
+.vt .bl{font-size:.88rem;font-weight:600}
+.vt-y{background:var(--y)}
+.vt-b{background:var(--b);color:#fff}
+.vt-w{background:#fff;border:1.5px solid var(--ink)}
+.vt-w li::before{background:var(--b)}
 
-/* security */
-.sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:980px){.sec-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.sec-grid{grid-template-columns:1fr}}
-.sec-item{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
-.sec-item .ico{color:var(--o)}
-.sec-item h4{font-size:1.05rem;margin:10px 0 6px}
-.sec-item p{font-size:.88rem;color:var(--muted)}
+/* SECURITY */
+.sec{background:var(--ink);color:#fff}
+.sec .sec-head p{color:#bdbdbd}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #333;border-left:1px solid #333}
+@media(max-width:980px){.sgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sgrid{grid-template-columns:1fr}}
+.si{padding:24px;border-right:1px solid #333;border-bottom:1px solid #333}
+.si .ico{color:var(--y)}
+.si h4{font-size:1.1rem;margin:12px 0 6px}
+.si p{font-size:.88rem;color:#b5b5b5}
 
-/* plans */
-.plan{display:flex;flex-direction:column}
-.plan.hot{border:2px solid var(--o);box-shadow:0 20px 50px -30px rgba(246,130,31,.6)}
-.plan .pt{font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--o-d)}
-.plan h3{font-size:1.8rem;margin:8px 0 6px}
-.plan p{color:var(--muted);font-size:.94rem;margin-bottom:18px}
-.plan ul{list-style:none;display:grid;gap:10px;margin-bottom:26px;flex:1}
-.plan li{font-size:.93rem;padding-left:22px;position:relative;color:var(--ink2)}
-.plan li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--o)}
+/* PLANS */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:940px){.plans{grid-template-columns:1fr}}
+.plan{border:1.5px solid var(--ink);border-radius:var(--r);padding:28px;display:flex;flex-direction:column}
+.plan .pt{font-family:"JetBrains Mono";font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.plan h3{font-size:2.2rem;margin:10px 0 6px}
+.plan > p{color:var(--muted);margin-bottom:18px}
+.plan ul{list-style:none;display:grid;gap:9px;margin-bottom:26px;flex:1}
+.plan li{font-size:.93rem;padding-left:20px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;background:var(--b)}
 .plan .btn{justify-content:center}
+.plan.hot{background:var(--b);color:#fff;border-color:var(--b)}
+.plan.hot > p{color:rgba(255,255,255,.8)}
+.plan.hot li::before{background:var(--y)}
+.plan.hot .pt{color:var(--y)}
 
-/* faq */
-.faq{max-width:880px;margin:0 auto}
-details{border-bottom:1px solid var(--line);padding:20px 0}
-summary{cursor:pointer;font-family:Urbanist;font-size:1.18rem;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:20px}
+/* FAQ */
+.faq{max-width:920px}
+details{border-top:1.5px solid var(--ink);padding:22px 0}
+details:last-child{border-bottom:1.5px solid var(--ink)}
+summary{cursor:pointer;font-size:1.25rem;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px;letter-spacing:-.01em}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--o);font-size:1.5rem;line-height:1;transition:.2s}
+summary::after{content:"+";font-family:"JetBrains Mono";color:var(--b);font-size:1.4rem;line-height:1;transition:.2s}
 details[open] summary::after{transform:rotate(45deg)}
-details p{color:var(--muted);margin-top:12px}
+details p{color:var(--muted);margin-top:12px;max-width:780px}
 
-/* cta */
-.cta-box{background:linear-gradient(135deg,var(--o) 0%,var(--o2) 100%);color:#fff;border-radius:24px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-@media(max-width:900px){.cta-box{grid-template-columns:1fr;padding:32px 22px}}
-.cta-box h2{font-size:clamp(2rem,3.8vw,2.8rem);margin:0 0 14px}
-.cta-box p{color:#fff3e6;font-size:1.05rem}
-.cta-box .checks{color:#fff;margin-top:20px}.cta-box .checks .ico{color:#fff}
-form{display:grid;gap:12px;background:#fff;padding:22px;border-radius:16px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* CTA */
+.cta{background:var(--y);overflow:hidden}
+.cta .giant{font-size:clamp(4.5rem,16vw,14rem);position:absolute;right:-10px;bottom:-30px;color:rgba(0,0,0,.06);pointer-events:none;white-space:nowrap}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;position:relative}
+@media(max-width:940px){.cta-grid{grid-template-columns:1fr}}
+.cta h2{font-size:clamp(2.3rem,4.6vw,3.7rem);margin:18px 0 18px}
+.cta p{font-size:1.08rem;color:var(--ink2)}
+.cks{display:grid;gap:10px;margin-top:24px;font-weight:600}
+.cks span{display:flex;align-items:center;gap:10px}
+.cks .ico{width:18px;height:18px;color:var(--b);stroke-width:2.6}
+form{display:grid;gap:10px;background:#fff;padding:24px;border-radius:var(--r);border:1.5px solid var(--ink)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:560px){.row2{grid-template-columns:1fr}}
-input,select,textarea{width:100%;background:#fff;border:1px solid var(--line2);color:var(--ink);border-radius:10px;padding:12px 14px;font:inherit;font-size:.94rem}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--o);box-shadow:0 0 0 3px var(--o-100)}
+input,select,textarea{width:100%;background:#fff;border:1.5px solid var(--line);color:var(--ink);padding:12px 14px;font:inherit;font-size:.94rem;border-radius:4px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b)}
 textarea{min-height:90px;resize:vertical}
 .form-ok{display:none;color:var(--green);font-size:.9rem;font-weight:600}
 
-footer{background:var(--navy);color:#9aa7bd;padding:56px 0 36px;font-size:.9rem}
+footer{background:var(--ink);color:#a8a8a8;padding:60px 0 30px;font-size:.9rem}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
 @media(max-width:800px){.foot{grid-template-columns:1fr 1fr}}
-footer h5{color:#fff;font-size:.95rem;margin-bottom:12px;font-family:Manrope;font-weight:700}
+footer h5{color:#fff;font-family:"JetBrains Mono";font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
 footer a{display:block;margin-bottom:8px}
-footer a:hover{color:var(--o2)}
-footer .logo{color:#fff}
-.foot-b{border-top:1px solid #23314a;margin-top:40px;padding-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.84rem}
+footer a:hover{color:var(--y)}
+.foot-big{font-family:Lexend,sans-serif;font-weight:700;letter-spacing:-.05em;font-size:clamp(4rem,17vw,15rem);line-height:.9;color:#222;margin-top:40px;white-space:nowrap;overflow:hidden}
+.foot-b{border-top:1px solid #333;padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;font-family:"JetBrains Mono"}
 
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
 .reveal.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.ln{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<!-- icon sprite -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="hatchK" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#f3fb09"/><line x1="0" y1="0" x2="0" y2="5" stroke="#141414" stroke-width="1.3"/></pattern>
+    <pattern id="engrave" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><rect width="3" height="3" fill="#f3fb09"/><line x1="0" y1="0" x2="3" y2="0" stroke="#141414" stroke-width=".55"/></pattern>
+  </defs>
+  <!-- RosettaDMS mark: geometric R built from blocks -->
+  <symbol id="rmark" viewBox="0 0 100 110">
+    <rect x="18" y="8" width="28" height="22" fill="#f3fb09"/>
+    <rect x="6" y="20" width="22" height="26" fill="url(#hatchK)"/>
+    <rect x="18" y="46" width="28" height="22" fill="#003ffe"/>
+    <rect x="18" y="68" width="28" height="16" fill="#141414"/>
+    <rect x="18" y="84" width="28" height="22" fill="url(#hatchK)"/>
+    <path d="M46 8 H68 A26 26 0 0 1 68 60 H46 Z" fill="#003ffe"/>
+    <path d="M68 34 H94 A26 26 0 0 1 72 60 Z" fill="#141414"/>
+    <path d="M46 22 L62 22 L62 106 L46 106 Z" fill="url(#engrave)"/>
+    <path d="M62 60 L72 60 L95 92 Q100 106 86 106 L62 106 Z" fill="#003ffe"/>
+    <g stroke="#141414" stroke-width=".8"><line x1="0" y1="62" x2="16" y2="62"/><line x1="8" y1="54" x2="8" y2="70"/><line x1="74" y1="22" x2="74" y2="44"/><line x1="64" y1="33" x2="84" y2="33"/></g>
+    <g fill="#003ffe"><rect x="4" y="80" width="2" height="2"/><rect x="9" y="80" width="2" height="2"/><rect x="4" y="85" width="2" height="2"/><rect x="9" y="85" width="2" height="2"/><rect x="4" y="90" width="2" height="2"/><rect x="9" y="90" width="2" height="2"/></g>
+  </symbol>
   <symbol id="i-bolt" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
   <symbol id="i-swap" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></symbol>
   <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
   <symbol id="i-pulse" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
-  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
   <symbol id="i-car" viewBox="0 0 24 24"><path d="M3 17v-5l2.2-5.5A2 2 0 0 1 7.06 5h9.88a2 2 0 0 1 1.86 1.5L21 12v5"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M3 17h2m4 0h6m4 0h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
   <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
   <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
   <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-phone-out" viewBox="0 0 24 24"><polyline points="23 7 23 1 17 1"/><line x1="16" y1="8" x2="23" y2="1"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-phone-miss" viewBox="0 0 24 24"><line x1="23" y1="1" x2="17" y2="7"/><line x1="17" y1="1" x2="23" y2="7"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
   <symbol id="i-key" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
-  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
-  <symbol id="i-video" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14"/></symbol>
   <symbol id="i-check-sq" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
-  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
-  <symbol id="i-pointer" viewBox="0 0 24 24"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></symbol>
-  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
-  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
   <symbol id="i-net" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
   <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
 </svg>
 
-<div class="topbar">Programa piloto 2026: conecta 4 dealers con DMS distintos en 30 días, sin costo. <a href="#contacto">Solicitar piloto</a></div>
+<div class="topbar"><div class="wrap">Programa piloto: 4 dealers con DMS distintos, 30 días, sin costo para el dealer. <a href="#contacto">Solicitar piloto</a></div></div>
 
 <nav>
   <div class="wrap">
-    <a href="#" class="logo" aria-label="RosettaDMS inicio">
-      <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#f6821f"/><path d="M9 6h14l3 4v16H6V10z" fill="#fff"/><path d="M10 13h12M10 17h9M10 21h12" stroke="#f6821f" stroke-width="1.8" stroke-linecap="round"/></svg>
-      Rosetta<b>DMS</b>
-    </a>
+    <a href="#" class="logo" aria-label="RosettaDMS inicio"><svg class="mk"><use href="#rmark"/></svg><span class="wm"><b>rosetta</b><small>DMS</small></span></a>
     <div class="nav-links">
       <a href="#problema">Problema</a>
       <a href="#como">Cómo funciona</a>
       <a href="#funciones">Funciones</a>
+      <a href="#voz">Voz con Allo</a>
       <a href="#ia">IA y MCP</a>
       <a href="#demo">Demo</a>
       <a href="#planes">Planes</a>
     </div>
-    <a href="#contacto" class="btn btn-o" style="padding:10px 18px;font-size:.9rem">Solicitar piloto</a>
+    <a href="#contacto" class="btn btn-b" style="padding:11px 18px;font-size:.9rem">Solicitar piloto</a>
   </div>
 </nav>
 
-<header class="hero">
+<!-- HERO -->
+<header class="hero grid-bg">
   <div class="wrap">
+    <div class="tags code-tag"><span>RDMS · X01-0</span><span>INTEROPERABILIDAD AUTOMOTRIZ</span><span>MX · 2026</span></div>
     <div class="hero-grid">
       <div>
-        <span class="eyebrow">Interoperabilidad automotriz con IA</span>
-        <h1>Todos tus dealers. Cualquier DMS. <span class="hl">Un solo idioma.</span></h1>
-        <p class="lead">RosettaDMS conecta a la marca con cada dealer de su red sin importar el DMS que use. Si el DMS tiene API, la usamos. Si no la tiene, un agente de IA lo opera como un asesor más. Un cerebro central concentra y traduce todo, y lo devuelve en forma de citas, pedidos de partes e inteligencia para toda la red.</p>
-        <div class="hero-ctas">
-          <a href="#demo" class="btn btn-o">Ver la demo en vivo <svg class="ico"><use href="#i-arrow"/></svg></a>
-          <a href="#como" class="btn btn-line">Cómo funciona</a>
+        <div class="hero-mark">
+          <svg viewBox="0 0 100 110" aria-hidden="true"><rect x="0" y="0" width="100" height="110" fill="#fff"/><use href="#rmark"/></svg>
+          <div class="hero-word">rosetta<small>DMS</small></div>
         </div>
-        <div class="checks">
-          <span><svg class="ico"><use href="#i-check"/></svg>Integración en minutos</span>
-          <span><svg class="ico"><use href="#i-check"/></svg>$0 para el dealer</span>
-          <span><svg class="ico"><use href="#i-check"/></svg>Sin modificar el DMS</span>
-          <span><svg class="ico"><use href="#i-check"/></svg>Listo para MCP</span>
+        <h1>Todos tus dealers. Cualquier DMS. Un solo idioma.</h1>
+        <p class="lead">Si el DMS tiene API, la usamos. Si no, un agente de IA lo opera como un asesor más. Un cerebro central concentra y traduce todo, y una capa de voz con Allo atiende a tus clientes por teléfono y mensaje. Sin costo para el dealer y sin modificar su DMS.</p>
+        <div class="hero-ctas">
+          <a href="#demo" class="btn btn-y">Ver la demo <svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a href="#como" class="btn btn-wl">Cómo funciona</a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 520 460">
-          <defs>
-            <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fbad41" stop-opacity=".45"/><stop offset="1" stop-color="#fbad41" stop-opacity="0"/></radialGradient>
-          </defs>
-          <circle cx="260" cy="230" r="210" fill="url(#glow)"/>
-          <circle cx="260" cy="230" r="170" fill="none" stroke="#ffd9b5" stroke-dasharray="3 6"/>
-          <circle cx="260" cy="230" r="110" fill="none" stroke="#ffd9b5" stroke-dasharray="3 6"/>
-          <g stroke="#f6821f" stroke-width="2" fill="none">
-            <path class="flow" d="M88 120 L210 205"/>
-            <path class="flow" d="M70 260 L200 240"/>
-            <path class="flow" d="M120 380 L215 270"/>
-            <path class="flow rev" d="M432 110 L310 200"/>
-            <path class="flow rev" d="M455 260 L320 240"/>
-            <path class="flow" d="M400 380 L305 270"/>
-          </g>
-          <!-- hub -->
-          <rect x="190" y="170" width="140" height="120" rx="22" fill="#fff" stroke="#f6821f" stroke-width="2.5"/>
-          <rect x="214" y="190" width="92" height="12" rx="6" fill="#f6821f"/>
-          <rect x="214" y="212" width="70" height="8" rx="4" fill="#ffd9b5"/>
-          <rect x="214" y="228" width="84" height="8" rx="4" fill="#ffd9b5"/>
-          <rect x="214" y="244" width="60" height="8" rx="4" fill="#ffd9b5"/>
-          <text x="260" y="276" text-anchor="middle" font-family="Urbanist" font-weight="800" font-size="13" fill="#1b1b1f">Cerebro central</text>
-          <!-- dealer nodes -->
-          <g font-family="Manrope" font-size="11" font-weight="700" fill="#1b1b1f">
-            <g><rect x="18" y="92" width="120" height="44" rx="12" fill="#fff" stroke="#e6e6e9"/><circle cx="36" cy="114" r="5" fill="#16a34a" class="pulse-dot"/><text x="48" y="111">Dealer · API</text><text x="48" y="125" fill="#8a8f99" font-weight="500" font-size="10">DMS en la nube</text></g>
-            <g><rect x="6" y="236" width="128" height="44" rx="12" fill="#fff" stroke="#e6e6e9"/><circle cx="24" cy="258" r="5" fill="#16a34a" class="pulse-dot"/><text x="36" y="255">Dealer · Agente</text><text x="36" y="269" fill="#8a8f99" font-weight="500" font-size="10">Escritorio Windows</text></g>
-            <g><rect x="50" y="370" width="128" height="44" rx="12" fill="#fff" stroke="#e6e6e9"/><circle cx="68" cy="392" r="5" fill="#16a34a" class="pulse-dot"/><text x="80" y="389">Dealer · Agente</text><text x="80" y="403" fill="#8a8f99" font-weight="500" font-size="10">Terminal legado</text></g>
-          </g>
-          <g font-family="Manrope" font-size="11" font-weight="700" fill="#1b1b1f">
-            <g><rect x="380" y="86" width="128" height="44" rx="12" fill="#fff" stroke="#e6e6e9"/><rect x="394" y="100" width="16" height="16" rx="4" fill="#f6821f"/><text x="418" y="105">Data lake</text><text x="418" y="119" fill="#8a8f99" font-weight="500" font-size="10">de la marca</text></g>
-            <g><rect x="386" y="238" width="128" height="44" rx="12" fill="#fff" stroke="#e6e6e9"/><rect x="400" y="252" width="16" height="16" rx="4" fill="#f6821f"/><text x="424" y="257">WhatsApp</text><text x="424" y="271" fill="#8a8f99" font-weight="500" font-size="10">y agentes vía MCP</text></g>
-            <g><rect x="352" y="370" width="138" height="44" rx="12" fill="#fff" stroke="#e6e6e9"/><rect x="366" y="384" width="16" height="16" rx="4" fill="#f6821f"/><text x="390" y="389">Orden JIT</text><text x="390" y="403" fill="#8a8f99" font-weight="500" font-size="10">partes predictivas</text></g>
-          </g>
-        </svg>
+      <div class="trio">
+        <div class="tcard tc-y">
+          <div class="th"><svg><use href="#rmark"/></svg><span class="code-tag">X01-1</span></div>
+          <div class="tl">Integración</div>
+          <h3>Conecta cualquier DMS sin tocar su código</h3>
+          <svg class="iso" viewBox="0 0 200 120" fill="none" stroke="#141414" stroke-width="1.2" aria-hidden="true">
+            <path d="M20 70 L60 50 L100 70 L60 90 Z"/><path d="M20 70 V100 L60 120 V90"/><path d="M100 70 V100 L60 120"/>
+            <path d="M70 45 L110 25 L150 45 L110 65 Z"/><path d="M70 45 V75"/><path d="M150 45 V75 L110 95 V65"/>
+            <path d="M120 80 L150 65 L180 80 L150 95 Z"/><path d="M120 80 V100 L150 115 V95"/><path d="M180 80 V100 L150 115"/>
+            <g stroke-width=".7"><path d="M28 74 L60 58 M36 78 L68 62 M44 82 L76 66 M52 86 L84 70"/></g>
+            <rect x="104" y="10" width="12" height="12" fill="#141414"/>
+          </svg>
+          <div class="num">&lt;15'</div>
+          <div class="nl">para conectar un dealer con DMS ya mapeado</div>
+          <div class="foot"><span>API</span><span>Computer use</span></div>
+        </div>
+        <div class="tcard tc-b">
+          <div class="th"><svg><use href="#rmark"/></svg><span class="code-tag">X01-2</span></div>
+          <div class="tl">Agenda de la red</div>
+          <h3>Citas por voz, WhatsApp y MCP</h3>
+          <div style="margin-top:auto">
+            <div style="display:flex;justify-content:space-between;font-size:.72rem;font-weight:600"><span>Citas por hora</span><span class="mono" style="opacity:.7">HOY</span></div>
+            <div class="heat" id="heroHeat"></div>
+            <div class="heat-l"><span>08</span><span>10</span><span>12</span><span>14</span><span>16</span><span>19</span></div>
+          </div>
+          <div class="num" style="margin-top:22px">24/7</div>
+          <div class="nl">atención al cliente final</div>
+        </div>
+        <div class="tcard tc-w">
+          <div class="th"><svg><use href="#rmark"/></svg></div>
+          <div class="tl" style="margin-top:14px">Para el dealer</div>
+          <div class="vstats">
+            <div class="vs"><div class="bars" style="--h:2px"></div><div><b>$0</b><span>costo para el dealer</span></div></div>
+            <div class="vs"><div class="bars" style="--h:3px"></div><div><b>0</b><span>líneas de código en el DMS</span></div></div>
+            <div class="vs"><div class="bars" style="--h:4px"></div><div><b>1</b><span>esquema para N DMS</span></div></div>
+            <div class="vs"><div class="bars" style="--h:5px"></div><div><b>24/7</b><span>llamadas contestadas por IA</span></div></div>
+          </div>
+          <div class="side"><span class="mono" style="font-size:.6rem;font-weight:700">RDMS</span><div class="hatch"></div><div class="stripe"></div></div>
+        </div>
       </div>
     </div>
-    <div class="stats reveal">
-      <div class="stat"><b>&lt; 15 min</b><span>para conectar un dealer con un DMS ya mapeado</span></div>
-      <div class="stat"><b>$0</b><span>de costo para el dealer, siempre</span></div>
-      <div class="stat"><b>0 líneas</b><span>de código modificadas en el DMS</span></div>
-      <div class="stat"><b>24/7</b><span>agenda y consultas por WhatsApp y MCP</span></div>
+    <div class="hero-strip">
+      <b>Compatible con</b>
+      <span class="dmsb">Web / SaaS</span><span class="dmsb">Escritorio Windows</span><span class="dmsb">Terminal / AS-400</span><span class="dmsb">Citrix / RDP</span><span class="dmsb">API REST / SOAP</span><span class="dmsb">Desarrollos propios</span>
     </div>
   </div>
 </header>
 
-<div class="strip">
-  <div class="wrap">
-    <b>Compatible con cualquier tipo de DMS:</b>
-    <span class="dmsbadge">Web / SaaS</span>
-    <span class="dmsbadge">Escritorio Windows</span>
-    <span class="dmsbadge">Terminal / AS-400</span>
-    <span class="dmsbadge">Citrix / RDP</span>
-    <span class="dmsbadge">API REST / SOAP</span>
-    <span class="dmsbadge">Desarrollos propios</span>
-  </div>
-</div>
-
 <!-- PROBLEMA -->
-<section id="problema">
+<section id="problema" class="problem">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">El problema</span>
-      <h2>Una red de dealers, decenas de DMS y nadie ve la foto completa</h2>
-      <p>Cada grupo distribuidor eligió su DMS hace años. Hoy la marca no puede ver en tiempo real lo que pasa en sus talleres, mostradores y pisos de venta, y el cliente final es quien termina pagando esa fragmentación.</p>
+    <div class="label">01 · El problema</div>
+    <div class="disp giant">Problema</div>
+    <div class="sec-head">
+      <h2 style="margin-top:0">Una red de dealers, decenas de DMS y nadie ve la foto completa</h2>
+      <p style="color:var(--ink2)">Cada grupo distribuidor eligió su DMS hace años. La marca no ve en tiempo real lo que pasa en talleres, mostradores y pisos de venta, y el cliente final es quien paga esa fragmentación.</p>
     </div>
-    <div class="grid3">
-      <div class="card pain reveal">
-        <span class="who">La marca</span>
-        <h3>Ciega entre reportes</h3>
-        <ul>
-          <li>Datos de servicio, partes e inventario que llegan tarde, incompletos o en Excel.</li>
-          <li>Integrar cada DMS por API cuesta meses y depende de su proveedor.</li>
-          <li>Fallas recurrentes en campo que se detectan semanas después.</li>
-          <li>Abasto de partes reactivo: se surte cuando el auto ya está detenido.</li>
-          <li>Chatbots que no pueden agendar porque no ven la agenda real del dealer.</li>
-        </ul>
-        <div class="quote">"Tenemos más de 200 puntos de venta y 9 DMS distintos. Consolidar un reporte nacional nos toma dos semanas."</div>
+    <div class="cards3">
+      <div class="pc pc-w reveal">
+        <span class="who">La marca</span><h3>Ciega entre reportes</h3>
+        <ul><li>Datos de servicio, partes e inventario tarde, incompletos o en Excel.</li><li>Integrar cada DMS por API cuesta meses y depende de su proveedor.</li><li>Fallas recurrentes detectadas semanas después.</li><li>Abasto de partes reactivo.</li><li>Chatbots que no ven la agenda real del dealer.</li></ul>
+        <div class="q">"Tenemos más de 200 puntos de venta y 9 DMS distintos. Consolidar un reporte nacional nos toma dos semanas."</div>
       </div>
-      <div class="card pain reveal">
-        <span class="who">El dealer</span>
-        <h3>Capturando dos veces</h3>
-        <ul>
-          <li>Personal dedicado a pasar a los portales de la marca lo que ya está en el DMS.</li>
-          <li>Proveedores de DMS que cobran cada integración o no la ofrecen.</li>
-          <li>Citas que llegan por teléfono, WhatsApp y portal y se empalman.</li>
-          <li>Autos detenidos esperando una pieza que nadie pidió a tiempo.</li>
-          <li>KPIs que la marca mide con datos atrasados.</li>
-        </ul>
-        <div class="quote">"No vamos a cambiar de DMS ni pagar otra integración. Ya tenemos suficiente con operar."</div>
+      <div class="pc pc-b reveal">
+        <span class="who">El dealer</span><h3>Capturando dos veces</h3>
+        <ul><li>Personal pasando a portales lo que ya está en el DMS.</li><li>Integraciones que cuestan o no existen.</li><li>Teléfonos saturados y llamadas que nadie contesta.</li><li>Autos detenidos esperando una pieza.</li><li>KPIs medidos con datos atrasados.</li></ul>
+        <div class="q">"No vamos a cambiar de DMS ni pagar otra integración. Ya tenemos suficiente con operar."</div>
       </div>
-      <div class="card pain reveal">
-        <span class="who">El cliente final</span>
-        <h3>Esperando sin respuesta</h3>
-        <ul>
-          <li>Nadie contesta el teléfono para agendar el servicio.</li>
-          <li>"Su auto está listo mañana"… y no lo está.</li>
-          <li>Llega a su cita y la pieza no está; tiene que regresar.</li>
-          <li>Pregunta por un auto de la web y ya se vendió.</li>
-          <li>Le cotizan una cosa y le cobran otra.</li>
-        </ul>
-        <div class="quote">"Compré el auto en una hora. Agendar el primer servicio me tomó tres días."</div>
+      <div class="pc pc-k reveal">
+        <span class="who">El cliente final</span><h3>Esperando sin respuesta</h3>
+        <ul><li>Nadie contesta el teléfono para agendar.</li><li>"Su auto está listo mañana"… y no lo está.</li><li>Llega a la cita y la pieza no está.</li><li>El auto de la web ya se vendió.</li><li>Le cotizan una cosa y le cobran otra.</li></ul>
+        <div class="q">"Compré el auto en una hora. Agendar el primer servicio me tomó tres días."</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- COMO FUNCIONA -->
-<section id="como" class="soft">
+<section id="como">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Cómo funciona</span>
-      <h2>Dos formas de conectar el DMS. <span class="hl">Un cerebro que lo concentra todo.</span></h2>
-      <p>Cada dealer se conecta con el mejor método disponible para su DMS. Lo que llega de cualquier método se traduce al mismo modelo de datos dentro del cerebro central, y desde ahí se distribuye a la marca y a los canales del cliente.</p>
+      <div class="label" style="color:var(--b)">02 · Cómo funciona</div>
+      <h2>Dos formas de conectar el DMS. Un cerebro que lo concentra todo.</h2>
+      <p>Cada dealer se conecta con el mejor método disponible para su DMS. Todo lo que llega se traduce al mismo modelo de datos dentro del cerebro central, y desde ahí sale hacia la marca, los agentes de IA y la capa de voz.</p>
     </div>
-
     <div class="conn">
-      <div class="card reveal">
-        <span class="badge api"><svg class="ico" style="width:15px;height:15px"><use href="#i-code"/></svg>Conector API</span>
+      <div class="cc cc-b reveal">
+        <div class="disp num">A</div>
+        <div class="label" style="color:var(--y)">Conector API</div>
         <h3>Cuando el DMS tiene API, la usamos</h3>
-        <p>Algunos DMS modernos ofrecen API REST o SOAP, exportaciones programadas o SFTP. En esos casos nos conectamos directo, que es lo más rápido y lo más estable.</p>
-        <ol>
-          <li>El dealer o su proveedor nos da credenciales de API con el alcance que defina.</li>
-          <li>Usamos un adaptador ya construido para ese DMS o configuramos uno nuevo.</li>
-          <li>Sincronizamos de forma incremental cada hora o en tiempo real con webhooks.</li>
-          <li>Las escrituras (citas, reservas de partes) también van por API, con validación previa.</li>
-        </ol>
-        <div class="when"><b>Ideal para:</b> DMS en la nube, plataformas con API pública o dealers que ya exportan reportes automáticamente.</div>
+        <p>Algunos DMS modernos ofrecen API REST o SOAP, exportaciones programadas o SFTP. Ahí nos conectamos directo, que es lo más rápido y estable.</p>
+        <ol><li>El dealer o su proveedor entrega credenciales de API con el alcance que defina.</li><li>Usamos un adaptador ya construido o configuramos uno nuevo.</li><li>Sincronización incremental cada hora o en tiempo real por webhooks.</li><li>Las escrituras (citas, reservas de partes) también van por API, con validación previa.</li></ol>
+        <div class="when"><b>Ideal para:</b> DMS en la nube y plataformas con API pública.</div>
       </div>
-      <div class="card reveal">
-        <span class="badge cu"><svg class="ico" style="width:15px;height:15px"><use href="#i-pointer"/></svg>Conector Computer Use</span>
+      <div class="cc cc-y reveal">
+        <div class="disp num">B</div>
+        <div class="label" style="color:var(--b)">Conector Computer Use</div>
         <h3>Cuando no hay API, un agente opera el DMS</h3>
-        <p>La mayoría de los DMS en México no tienen API abierta. Ahí un agente de IA entra con un usuario dedicado y usa el sistema como lo haría un asesor: ve la pantalla, navega menús, descarga reportes y captura citas.</p>
-        <ol>
-          <li>El dueño del DMS crea un usuario con los permisos que decida (lectura, o también citas).</li>
-          <li>El agente corre en un escritorio virtual aislado y graba cada sesión.</li>
-          <li>Sigue un playbook del DMS: qué pantallas abrir, qué reportes bajar y cómo leerlos.</li>
-          <li>Si la pantalla cambia, el agente se adapta por visión y el playbook se actualiza.</li>
-        </ol>
+        <p>La mayoría de los DMS en México no tiene API abierta. Un agente de IA entra con un usuario dedicado y usa el sistema como un asesor: ve la pantalla, navega menús, descarga reportes y captura citas.</p>
+        <ol><li>El dueño del DMS crea un usuario con los permisos que decida.</li><li>El agente corre en un escritorio virtual aislado y graba cada sesión.</li><li>Sigue un playbook del DMS: qué pantallas abrir, qué reportes bajar y cómo leerlos.</li><li>Si la pantalla cambia, se adapta por visión y el playbook se actualiza.</li></ol>
         <div class="when"><b>Ideal para:</b> DMS de escritorio, terminales legadas, Citrix/RDP y desarrollos propios.</div>
       </div>
     </div>
+    <div class="hyb reveal">
+      <div class="sq"><svg class="ico"><use href="#i-net"/></svg></div>
+      <div><h4>Modo híbrido y selección automática</h4><p>En el alta detectamos qué ofrece el DMS. La API cubre lo que expone y el agente de computer use completa el resto, por ejemplo la agenda o los reportes de taller. Para la marca el resultado es el mismo: un solo flujo, un solo esquema y la misma frecuencia.</p></div>
+      <div class="hatch"></div>
+    </div>
 
-    <div class="decide reveal">
-      <svg class="ico"><use href="#i-net"/></svg>
-      <div>
-        <h4>Modo híbrido y selección automática</h4>
-        <p>En el alta del dealer detectamos qué ofrece su DMS. Si hay API, se usa para lo que cubra, y el agente de computer use completa lo que la API no expone (por ejemplo, reportes de taller o la agenda). El resultado es el mismo para la marca: un solo flujo de datos, con el mismo esquema y la misma frecuencia.</p>
+    <div class="reveal">
+      <div class="arch">
+        <svg viewBox="0 0 1100 430" role="img" aria-label="Arquitectura del cerebro central">
+          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#141414" letter-spacing="1">
+            <text x="20" y="24">X02-1 · DEALERS</text><text x="350" y="24">X02-2 · CEREBRO CENTRAL / CONCENTRADOR</text><text x="880" y="24">X02-3 · SALIDAS</text>
+          </g>
+          <g font-family="Inter Tight" font-size="13.5" fill="#141414">
+            <rect x="20" y="44" width="220" height="62" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="36" y="70" font-weight="600">DMS con API</text><rect x="36" y="80" width="68" height="16" fill="#003ffe"/><text x="42" y="92" fill="#fff" font-family="JetBrains Mono" font-size="9.5" font-weight="700">API</text>
+            <rect x="20" y="122" width="220" height="62" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="36" y="148" font-weight="600">DMS de escritorio</text><rect x="36" y="158" width="104" height="16" fill="#f3fb09"/><text x="42" y="170" font-family="JetBrains Mono" font-size="9.5" font-weight="700">COMPUTER USE</text>
+            <rect x="20" y="200" width="220" height="62" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="36" y="226" font-weight="600">Terminal legada</text><rect x="36" y="236" width="104" height="16" fill="#f3fb09"/><text x="42" y="248" font-family="JetBrains Mono" font-size="9.5" font-weight="700">COMPUTER USE</text>
+            <rect x="20" y="278" width="220" height="62" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="36" y="304" font-weight="600">DMS web parcial</text><rect x="36" y="314" width="68" height="16" fill="#141414"/><text x="42" y="326" fill="#fff" font-family="JetBrains Mono" font-size="9.5" font-weight="700">HÍBRIDO</text>
+            <rect x="20" y="356" width="220" height="62" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="36" y="382" font-weight="600">Teléfono del dealer</text><rect x="36" y="392" width="92" height="16" fill="#fde68a"/><text x="42" y="404" fill="#002c2a" font-family="JetBrains Mono" font-size="9.5" font-weight="700">VOZ · ALLO</text>
+          </g>
+          <g stroke="#003ffe" stroke-width="2" fill="none">
+            <path class="flow" d="M240 75 L350 170"/><path class="flow" d="M240 153 L350 190"/><path class="flow" d="M240 231 L350 210"/><path class="flow" d="M240 309 L350 230"/><path class="flow rev" d="M240 387 L350 250"/>
+          </g>
+          <rect x="350" y="40" width="460" height="380" fill="#003ffe"/>
+          <g font-family="Inter Tight" font-size="12.5" fill="#141414">
+            <rect x="370" y="60" width="205" height="54" fill="#fff"/><text x="384" y="83" font-weight="700">01 · Orquestador</text><text x="384" y="101" fill="#555" font-size="11">cola, horarios, reintentos</text>
+            <rect x="585" y="60" width="205" height="54" fill="#fff"/><text x="599" y="83" font-weight="700">Bóveda + auditoría</text><text x="599" y="101" fill="#555" font-size="11">credenciales, grabaciones</text>
+            <rect x="370" y="124" width="420" height="54" fill="#f3fb09"/><text x="384" y="147" font-weight="700">02 · Ingesta y Rosetta Schema</text><text x="384" y="165" fill="#2b2b2b" font-size="11">órdenes, fallas, partes, citas, unidades, leads y llamadas en un solo modelo</text>
+            <rect x="370" y="188" width="205" height="54" fill="#fff"/><text x="384" y="211" font-weight="700">03 · Almacén unificado</text><text x="384" y="229" fill="#555" font-size="11">historial por VIN y dealer</text>
+            <rect x="585" y="188" width="205" height="54" fill="#fff"/><text x="599" y="211" font-weight="700">04 · Motor de IA</text><text x="599" y="229" fill="#555" font-size="11">predicción, anomalías, JIT</text>
+            <rect x="370" y="252" width="420" height="54" fill="#fff"/><text x="384" y="275" font-weight="700">05 · Automatizaciones</text><text x="384" y="293" fill="#555" font-size="11">pedido de partes, escalamiento de leads, recalls, encuestas, llamadas</text>
+            <rect x="370" y="316" width="420" height="44" fill="#141414"/><text x="580" y="343" text-anchor="middle" font-weight="700" fill="#f3fb09">06 · Gateway API · Webhooks · Servidor MCP</text>
+            <text x="370" y="398" fill="#fff" font-family="JetBrains Mono" font-size="10" opacity=".75">RDMS · CORE</text><text x="790" y="398" text-anchor="end" fill="#fff" font-family="JetBrains Mono" font-size="10" opacity=".75">X02-2</text>
+          </g>
+          <g stroke="#003ffe" stroke-width="2" fill="none">
+            <path class="flow" d="M810 110 L880 80"/><path class="flow" d="M810 200 L880 190"/><path class="flow rev" d="M810 300 L880 300"/><path class="flow rev" d="M810 340 L880 395"/>
+          </g>
+          <g font-family="Inter Tight" font-size="13.5" fill="#141414">
+            <rect x="880" y="44" width="200" height="66" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="896" y="72" font-weight="600">Data lake / BI</text><text x="896" y="92" fill="#555" font-size="11">S3 · BigQuery · Snowflake</text>
+            <rect x="880" y="156" width="200" height="66" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="896" y="184" font-weight="600">Consola de la marca</text><text x="896" y="204" fill="#555" font-size="11">red nacional, alertas</text>
+            <rect x="880" y="266" width="200" height="66" fill="#f3fb09" stroke="#141414" stroke-width="1.5"/><text x="896" y="294" font-weight="600">WhatsApp · Agentes IA</text><text x="896" y="314" fill="#2b2b2b" font-size="11">citas y consultas vía MCP</text>
+            <rect x="880" y="362" width="200" height="56" fill="#fff" stroke="#141414" stroke-width="1.5"/><text x="896" y="386" font-weight="600">Recepcionista IA</text><text x="896" y="404" fill="#555" font-size="11">voz y SMS con Allo</text>
+          </g>
+        </svg>
+      </div>
+      <div class="layers">
+        <div class="layer"><span class="n">01 · CONCENTRA</span><h4>Un punto de entrada</h4><p>Todo conector entrega al orquestador. Nada sale de un dealer sin pasar por el cerebro.</p></div>
+        <div class="layer"><span class="n">02 · TRADUCE</span><h4>Rosetta Schema</h4><p>"OT", "RO", "Orden" y "Work order" terminan siendo la misma entidad.</p></div>
+        <div class="layer"><span class="n">03 · RECUERDA</span><h4>Historial por VIN</h4><p>La historia completa del vehículo aunque haya pasado por varios dealers.</p></div>
+        <div class="layer"><span class="n">04 · PIENSA</span><h4>IA predictiva</h4><p>Demanda de partes, patrones de falla y dealers en riesgo.</p></div>
+        <div class="layer"><span class="n">05 · ACTÚA</span><h4>Automatiza y expone</h4><p>Reglas, API y MCP para que bots, agentes y la recepcionista de voz actúen.</p></div>
       </div>
     </div>
 
-    <!-- architecture -->
-    <div class="arch reveal" aria-label="Arquitectura del cerebro central">
-      <svg viewBox="0 0 1100 420" role="img">
-        <defs>
-          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f6821f"/></marker>
-        </defs>
-        <text x="20" y="28" font-family="Manrope" font-size="12" font-weight="800" fill="#8a8f99" letter-spacing="1.5">DEALERS</text>
-        <text x="350" y="28" font-family="Manrope" font-size="12" font-weight="800" fill="#8a8f99" letter-spacing="1.5">CEREBRO CENTRAL · CONCENTRADOR</text>
-        <text x="880" y="28" font-family="Manrope" font-size="12" font-weight="800" fill="#8a8f99" letter-spacing="1.5">MARCA Y CANALES</text>
-        <g font-family="Manrope" font-size="13" fill="#1b1b1f">
-          <rect x="20" y="50" width="220" height="60" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="38" y="76" font-weight="700">DMS con API</text><text x="38" y="96" fill="#2563eb" font-size="11" font-weight="700">CONECTOR API</text>
-          <rect x="20" y="130" width="220" height="60" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="38" y="156" font-weight="700">DMS de escritorio</text><text x="38" y="176" fill="#d9650a" font-size="11" font-weight="700">COMPUTER USE</text>
-          <rect x="20" y="210" width="220" height="60" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="38" y="236" font-weight="700">Terminal legada</text><text x="38" y="256" fill="#d9650a" font-size="11" font-weight="700">COMPUTER USE</text>
-          <rect x="20" y="290" width="220" height="60" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="38" y="316" font-weight="700">DMS web parcial</text><text x="38" y="336" fill="#6d28d9" font-size="11" font-weight="700">HÍBRIDO</text>
-        </g>
-        <g stroke="#f6821f" stroke-width="2" fill="none">
-          <path class="flow" d="M240 80 L350 160"/><path class="flow" d="M240 160 L350 180"/><path class="flow" d="M240 240 L350 200"/><path class="flow" d="M240 320 L350 220"/>
-        </g>
-        <!-- brain box -->
-        <rect x="350" y="45" width="460" height="355" rx="20" fill="#fff6ee" stroke="#f6821f" stroke-width="2"/>
-        <g font-family="Manrope" font-size="12.5" fill="#1b1b1f">
-          <rect x="372" y="65" width="200" height="52" rx="10" fill="#fff" stroke="#ffd9b5"/><text x="388" y="88" font-weight="800">1 · Orquestador</text><text x="388" y="106" fill="#5f6470" font-size="11">cola, horarios, reintentos</text>
-          <rect x="590" y="65" width="200" height="52" rx="10" fill="#fff" stroke="#ffd9b5"/><text x="606" y="88" font-weight="800">Bóveda + auditoría</text><text x="606" y="106" fill="#5f6470" font-size="11">credenciales, grabaciones</text>
-          <rect x="372" y="135" width="418" height="52" rx="10" fill="#fff" stroke="#ffd9b5"/><text x="388" y="158" font-weight="800">2 · Ingesta y Rosetta Schema</text><text x="388" y="176" fill="#5f6470" font-size="11">traduce órdenes, fallas, partes, citas y leads de cualquier DMS a un modelo</text>
-          <rect x="372" y="205" width="200" height="52" rx="10" fill="#fff" stroke="#ffd9b5"/><text x="388" y="228" font-weight="800">3 · Almacén unificado</text><text x="388" y="246" fill="#5f6470" font-size="11">historial por VIN y dealer</text>
-          <rect x="590" y="205" width="200" height="52" rx="10" fill="#fff" stroke="#ffd9b5"/><text x="606" y="228" font-weight="800">4 · Motor de IA</text><text x="606" y="246" fill="#5f6470" font-size="11">predicción, anomalías, JIT</text>
-          <rect x="372" y="275" width="418" height="52" rx="10" fill="#fff" stroke="#ffd9b5"/><text x="388" y="298" font-weight="800">5 · Automatizaciones</text><text x="388" y="316" fill="#5f6470" font-size="11">reglas y eventos: pedido de partes, escalamiento de leads, recalls, encuestas</text>
-          <rect x="372" y="340" width="418" height="44" rx="10" fill="#f6821f"/><text x="581" y="367" text-anchor="middle" font-weight="800" fill="#fff">6 · Gateway API · Webhooks · Servidor MCP</text>
-        </g>
-        <g stroke="#f6821f" stroke-width="2" fill="none">
-          <path class="flow" d="M810 120 L880 80"/><path class="flow rev" d="M810 230 L880 200"/><path class="flow rev" d="M810 362 L880 330"/>
-        </g>
-        <g font-family="Manrope" font-size="13" fill="#1b1b1f">
-          <rect x="880" y="50" width="200" height="70" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="898" y="78" font-weight="700">Data lake / BI</text><text x="898" y="98" fill="#8a8f99" font-size="11">S3 · BigQuery · Snowflake</text>
-          <rect x="880" y="165" width="200" height="70" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="898" y="193" font-weight="700">Consola de la marca</text><text x="898" y="213" fill="#8a8f99" font-size="11">red nacional, alertas</text>
-          <rect x="880" y="290" width="200" height="70" rx="12" fill="#fff" stroke="#e6e6e9"/><text x="898" y="318" font-weight="700">WhatsApp · Agentes</text><text x="898" y="338" fill="#8a8f99" font-size="11">citas y consultas vía MCP</text>
-        </g>
-        <text x="550" y="414" text-anchor="middle" font-family="Manrope" font-size="11" fill="#8a8f99">Los datos fluyen hacia la marca; las acciones (citas, reservas, consultas) regresan al DMS del dealer.</text>
-      </svg>
-    </div>
-
-    <div class="layers">
-      <div class="layer reveal"><span class="n">01 · CONCENTRA</span><h4>Un solo punto de entrada</h4><p>Cada conector entrega al orquestador. Nada sale de un dealer hacia la marca sin pasar por el cerebro.</p></div>
-      <div class="layer reveal"><span class="n">02 · TRADUCE</span><h4>Rosetta Schema</h4><p>"OT", "RO", "Orden" y "Work order" terminan siendo la misma entidad, con el mismo formato y los mismos códigos.</p></div>
-      <div class="layer reveal"><span class="n">03 · RECUERDA</span><h4>Historial por VIN</h4><p>Cada vehículo tiene su historia completa aunque haya pasado por varios dealers con DMS distintos.</p></div>
-      <div class="layer reveal"><span class="n">04 · PIENSA</span><h4>IA predictiva</h4><p>Pronostica demanda de partes, detecta patrones de falla y marca dealers en riesgo.</p></div>
-      <div class="layer reveal"><span class="n">05 · ACTÚA</span><h4>Automatiza y expone</h4><p>Dispara reglas y ofrece API y MCP para que bots y agentes agenden y consulten.</p></div>
-    </div>
-
-    <div class="timeline reveal">
-      <div class="tl"><span class="time">Minuto 0</span><h4>El dealer crea el usuario</h4><p>O entrega credenciales de API. Define permisos y horario de acceso.</p></div>
-      <div class="tl"><span class="time">Minuto 5</span><h4>Detección del DMS</h4><p>Identificamos el DMS y elegimos conector: API, computer use o híbrido.</p></div>
-      <div class="tl"><span class="time">Minuto 10</span><h4>Primera sincronización</h4><p>Si el playbook ya existe, el dealer aparece en la consola con datos reales.</p></div>
-      <div class="tl"><span class="time">Día 1 en adelante</span><h4>Operación continua</h4><p>Sincronización diaria u horaria, citas bidireccionales y alertas activas.</p></div>
+    <div class="steps4 reveal">
+      <div class="st"><span class="t">MIN 00</span><h4>El dealer crea el usuario</h4><p>O entrega credenciales de API. Define permisos y horario.</p></div>
+      <div class="st"><span class="t">MIN 05</span><h4>Detección del DMS</h4><p>Elegimos conector: API, computer use o híbrido.</p></div>
+      <div class="st"><span class="t">MIN 10</span><h4>Primera sincronización</h4><p>Con playbook existente, el dealer aparece en la consola con datos reales.</p></div>
+      <div class="st"><span class="t">DÍA 01+</span><h4>Operación continua</h4><p>Sincronización diaria u horaria, citas bidireccionales, voz y alertas.</p></div>
     </div>
   </div>
 </section>
 
 <!-- FUNCIONES -->
-<section id="funciones">
+<section id="funciones" style="background:var(--mist2);border-top:1.5px solid var(--ink)">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Funciones</span>
+      <div class="label" style="color:var(--b)">03 · Funciones</div>
       <h2>Lo que la marca necesita saber y lo que el cliente necesita resolver</h2>
-      <p>La plataforma trabaja en ambas direcciones: lleva la información del dealer a la marca, y las acciones de la marca y del cliente hasta el DMS.</p>
+      <p>Bidireccional: lleva la información del dealer a la marca, y las acciones de la marca y del cliente hasta el DMS.</p>
     </div>
     <div class="bento">
-      <div class="feat reveal"><span class="tag t-core">Núcleo</span><div class="ic"><svg class="ico"><use href="#i-bolt"/></svg></div><h4>Integración en minutos</h4><p>Sin proyectos de TI. Un usuario en el DMS o una llave de API, y el dealer queda conectado ese mismo día.</p></div>
-      <div class="feat reveal"><span class="tag t-core">Núcleo</span><div class="ic"><svg class="ico"><use href="#i-gift"/></svg></div><h4>Sin costo para el dealer</h4><p>La marca financia la red. El dealer no paga licencias, no instala nada y deja de capturar en portales.</p></div>
-      <div class="feat reveal"><span class="tag t-core">Núcleo</span><div class="ic"><svg class="ico"><use href="#i-swap"/></svg></div><h4>Bidireccional</h4><p>Lectura de reportes, órdenes e inventario, y escritura de citas, prospectos y reservas de partes en el DMS.</p></div>
-      <div class="feat reveal"><span class="tag t-brand">Marca</span><div class="ic"><svg class="ico"><use href="#i-box"/></svg></div><h4>Orden Just-in-Time predictiva</h4><p>Cruza fallas reportadas, órdenes abiertas, citas futuras y existencias para pedir partes antes de que el auto llegue al taller.</p></div>
-      <div class="feat reveal"><span class="tag t-brand">Marca</span><div class="ic"><svg class="ico"><use href="#i-pulse"/></svg></div><h4>Alerta temprana de calidad</h4><p>Detecta patrones de falla por modelo, año, lote o región entre todos los dealers, antes que el reporte de garantías.</p></div>
-      <div class="feat reveal"><span class="tag t-brand">Marca</span><div class="ic"><svg class="ico"><use href="#i-cpu"/></svg></div><h4>Servidor MCP y API para agentes</h4><p>Tus bots de WhatsApp y agentes de IA consultan, agendan y dan seguimiento en cualquier dealer con un solo conector.</p></div>
-      <div class="feat reveal"><span class="tag t-svc">Servicio</span><div class="ic"><svg class="ico"><use href="#i-cal"/></svg></div><h4>Agenda 24/7 con disponibilidad real</h4><p>Citas confirmadas contra la agenda real del taller y la capacidad de técnicos y bahías.</p></div>
-      <div class="feat reveal"><span class="tag t-svc">Servicio</span><div class="ic"><svg class="ico"><use href="#i-car"/></svg></div><h4>Estatus del auto en vivo</h4><p>Recepción, diagnóstico, espera de pieza, lavado, listo. El cliente lo ve en WhatsApp, tomado directo de la orden.</p></div>
-      <div class="feat reveal"><span class="tag t-svc">Servicio</span><div class="ic"><svg class="ico"><use href="#i-tool"/></svg></div><h4>Pieza lista antes de la cita</h4><p>Con el VIN y el síntoma se verifica existencia y se aparta o solicita la pieza desde que se agenda.</p></div>
-      <div class="feat reveal"><span class="tag t-svc">Servicio</span><div class="ic"><svg class="ico"><use href="#i-doc"/></svg></div><h4>Presupuesto transparente</h4><p>Aprobación digital de trabajos adicionales con foto, video y precio antes de ejecutarlos.</p></div>
-      <div class="feat reveal"><span class="tag t-svc">Servicio</span><div class="ic"><svg class="ico"><use href="#i-bell"/></svg></div><h4>Recalls y mantenimiento proactivo</h4><p>Cruza VIN contra campañas y kilometraje estimado, e invita al cliente con una cita ya propuesta.</p></div>
-      <div class="feat reveal"><span class="tag t-sales">Ventas</span><div class="ic"><svg class="ico"><use href="#i-clock"/></svg></div><h4>Vigilancia del SLA de leads</h4><p>Mide el tiempo hasta el primer contacto de cada prospecto. Si se excede, escala o reasigna.</p></div>
-      <div class="feat reveal"><span class="tag t-sales">Ventas</span><div class="ic"><svg class="ico"><use href="#i-tag"/></svg></div><h4>Inventario de unidades verificado</h4><p>El catálogo muestra lo que realmente hay en piso, con precio y color. Se aparta la unidad desde el chat.</p></div>
-      <div class="feat reveal"><span class="tag t-sales">Ventas</span><div class="ic"><svg class="ico"><use href="#i-star"/></svg></div><h4>NPS con cierre de ciclo</h4><p>Encuesta automática al entregar. Una calificación baja abre un caso con el gerente de inmediato.</p></div>
-      <div class="feat reveal"><span class="tag t-brand">Marca</span><div class="ic"><svg class="ico"><use href="#i-shield"/></svg></div><h4>Pre-validación de garantías</h4><p>Revisa órdenes contra las reglas de garantía antes del envío y reduce rechazos y tiempos de reembolso.</p></div>
+      <div class="feat reveal"><span class="ftag">Núcleo</span><div class="ic"><svg class="ico"><use href="#i-bolt"/></svg></div><h4>Integración en minutos</h4><p>Un usuario en el DMS o una llave de API, y el dealer queda conectado ese mismo día.</p></div>
+      <div class="feat reveal"><span class="ftag">Núcleo</span><div class="ic"><svg class="ico"><use href="#i-gift"/></svg></div><h4>Sin costo para el dealer</h4><p>La marca financia la red. El dealer no paga licencias de RosettaDMS ni instala nada.</p></div>
+      <div class="feat reveal"><span class="ftag">Núcleo</span><div class="ic"><svg class="ico"><use href="#i-swap"/></svg></div><h4>Bidireccional</h4><p>Lee reportes, órdenes e inventario, y escribe citas, prospectos y reservas de partes en el DMS.</p></div>
+      <div class="feat reveal"><span class="ftag">Voz</span><div class="ic"><svg class="ico"><use href="#i-phone"/></svg></div><h4>Recepcionista IA con Allo</h4><p>Contesta las llamadas del dealer al segundo tono, agenda con disponibilidad real y transfiere al asesor correcto.</p></div>
+      <div class="feat reveal"><span class="ftag">Marca</span><div class="ic"><svg class="ico"><use href="#i-box"/></svg></div><h4>Orden Just-in-Time predictiva</h4><p>Cruza fallas, órdenes abiertas, citas futuras y existencias para pedir partes antes de que llegue el auto.</p></div>
+      <div class="feat reveal"><span class="ftag">Marca</span><div class="ic"><svg class="ico"><use href="#i-pulse"/></svg></div><h4>Alerta temprana de calidad</h4><p>Patrones de falla por modelo, año, lote o región, incluidos los que los clientes reportan por teléfono.</p></div>
+      <div class="feat reveal"><span class="ftag">Marca</span><div class="ic"><svg class="ico"><use href="#i-cpu"/></svg></div><h4>Servidor MCP y API</h4><p>Bots de WhatsApp y agentes de IA consultan, agendan y dan seguimiento en cualquier dealer.</p></div>
+      <div class="feat reveal"><span class="ftag">Servicio</span><div class="ic"><svg class="ico"><use href="#i-cal"/></svg></div><h4>Agenda 24/7 real</h4><p>Citas confirmadas contra la capacidad real de técnicos y bahías.</p></div>
+      <div class="feat reveal"><span class="ftag">Servicio</span><div class="ic"><svg class="ico"><use href="#i-car"/></svg></div><h4>Estatus del auto en vivo</h4><p>De recepción a "listo", por WhatsApp, SMS o llamada, tomado directo de la orden.</p></div>
+      <div class="feat reveal"><span class="ftag">Servicio</span><div class="ic"><svg class="ico"><use href="#i-tool"/></svg></div><h4>Pieza lista antes de la cita</h4><p>Con VIN y síntoma se verifica existencia y se aparta o solicita la pieza.</p></div>
+      <div class="feat reveal"><span class="ftag">Servicio</span><div class="ic"><svg class="ico"><use href="#i-doc"/></svg></div><h4>Presupuesto transparente</h4><p>Aprobación digital de trabajos adicionales con evidencia y precio.</p></div>
+      <div class="feat reveal"><span class="ftag">Servicio</span><div class="ic"><svg class="ico"><use href="#i-bell"/></svg></div><h4>Recalls proactivos</h4><p>Por VIN y kilometraje, con llamada o mensaje y cita ya propuesta.</p></div>
+      <div class="feat reveal"><span class="ftag">Ventas</span><div class="ic"><svg class="ico"><use href="#i-clock"/></svg></div><h4>SLA de leads vigilado</h4><p>Tiempo al primer contacto medido; si se excede, la IA llama al prospecto o reasigna.</p></div>
+      <div class="feat reveal"><span class="ftag">Ventas</span><div class="ic"><svg class="ico"><use href="#i-tag"/></svg></div><h4>Inventario verificado</h4><p>Unidades realmente en piso, con precio y color; se apartan desde el chat.</p></div>
+      <div class="feat reveal"><span class="ftag">Ventas</span><div class="ic"><svg class="ico"><use href="#i-star"/></svg></div><h4>NPS con cierre de ciclo</h4><p>Encuesta al entregar; una calificación baja abre un caso con el gerente.</p></div>
     </div>
   </div>
 </section>
 
-<!-- IA / MCP / AUTOMATIZACION -->
-<section id="ia" class="soft">
+<!-- ALLO / VOZ -->
+<section id="voz" class="voice grid-bg">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">IA, MCP y automatización</span>
-      <h2>Hecho para que <span class="hl">agentes de IA</span> trabajen con toda tu red</h2>
-      <p>RosettaDMS expone la red completa como herramientas MCP (Model Context Protocol). Cualquier agente compatible, ya sea tu bot de WhatsApp, tu call center con IA o un asistente interno, puede consultar y actuar en cualquier dealer sin saber qué DMS usa.</p>
+      <div class="label" style="color:var(--y)">04 · Capa de voz y mensajería</div>
+      <div class="partner" style="margin-top:22px">
+        <span class="logo on-dark"><svg class="mk" style="background:#fff;padding:2px"><use href="#rmark"/></svg><span class="wm"><b>rosetta</b><small>DMS</small></span></span>
+        <span class="x">+</span>
+        <img src="allo-logo-white.svg" alt="Allo" width="105" height="40">
+        <span class="pl">Proveedor de telefonía con IA</span>
+      </div>
+      <h2>Un agente que contesta, llama y escribe por el dealer</h2>
+      <p>Integramos <b>Allo</b>, un sistema telefónico con agentes de IA, como la capa de comunicación del dealer con sus clientes. Allo pone la voz y RosettaDMS pone el conocimiento del DMS: horarios libres reales, estatus de cada orden, existencias y el historial por VIN. Así el agente de voz resuelve en la llamada, en lugar de solo tomar un recado.</p>
+    </div>
+
+    <div class="vgrid">
+      <div class="vc hl reveal"><div class="ic"><svg class="ico"><use href="#i-phone"/></svg></div><h4>Contesta llamadas 24/7</h4><p>La recepcionista IA de Allo contesta al segundo tono, de día o de noche. Responde dudas de servicio, precios de paquetes y horarios, y agenda en un horario realmente libre del taller, que consulta en el DMS a través de RosettaDMS.</p></div>
+      <div class="vc reveal"><div class="ic"><svg class="ico"><use href="#i-users"/></svg></div><h4>Transfiere a la persona correcta</h4><p>Si la llamada necesita a una persona, va al asesor de servicio, a refacciones o a ventas, con el historial del cliente y del VIN ya abierto.</p></div>
+      <div class="vc reveal"><div class="ic"><svg class="ico"><use href="#i-phone-miss"/></svg></div><h4>SMS ante llamada perdida</h4><p>Si nadie puede contestar, Allo envía un mensaje al instante desde el número del dealer. La llamada perdida se convierte en conversación en lugar de un cliente que se va con la competencia.</p></div>
+      <div class="vc reveal"><div class="ic"><svg class="ico"><use href="#i-phone-out"/></svg></div><h4>Llamadas salientes automáticas</h4><p>Recordatorios de cita, aviso de "su auto está listo", campañas de recall y seguimiento a leads que superan el SLA, disparados por las automatizaciones del cerebro.</p></div>
+      <div class="vc reveal"><div class="ic"><svg class="ico"><use href="#i-file-text"/></svg></div><h4>Cada llamada, resumida</h4><p>Tras cada llamada, Allo redacta un resumen con puntos clave y siguientes pasos. RosettaDMS lo guarda en el historial del VIN y lo usa para detectar quejas y fallas reportadas por voz.</p></div>
+      <div class="vc reveal"><div class="ic"><svg class="ico"><use href="#i-cpu"/></svg></div><h4>MCP con MCP</h4><p>Allo tiene su propio servidor MCP y RosettaDMS el suyo. Juntos dan a cualquier agente de IA la conversación con el cliente y el contexto completo del DMS.</p></div>
+    </div>
+
+    <div class="callflow reveal">
+      <div class="cf"><span class="who">Cliente</span><div class="n">01</div><h5>Llama al dealer</h5><p>A las 21:40, fuera de horario, para agendar su servicio.</p></div>
+      <div class="cf"><span class="who">Allo</span><div class="n">02</div><h5>La IA contesta</h5><p>Identifica al cliente por su número y entiende qué necesita.</p></div>
+      <div class="cf"><span class="who">RosettaDMS · MCP</span><div class="n">03</div><h5>Consulta el DMS</h5><p>Horarios libres, existencia de partes y historial del VIN.</p></div>
+      <div class="cf"><span class="who">DMS del dealer</span><div class="n">04</div><h5>Agenda la cita</h5><p>Captura la cita en el DMS por API o computer use y aparta las partes.</p></div>
+      <div class="cf"><span class="who">Cerebro</span><div class="n">05</div><h5>Aprende</h5><p>El resumen de la llamada entra al historial y a los indicadores de la red.</p></div>
+    </div>
+
+    <div class="vsplit">
+      <div class="call reveal" aria-label="Simulación de una llamada atendida por IA">
+        <div class="call-h">
+          <div><b>Llamada entrante · Motores Regios</b><small>RECEPCIONISTA IA · ALLO + ROSETTADMS</small></div>
+          <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="lines" id="callLines"></div>
+      </div>
+      <div class="ready reveal">
+        <span class="label" style="color:var(--b)">Listo para integrar</span>
+        <h4 style="margin-top:12px">Se activa por dealer en minutos</h4>
+        <p>Allo ofrece API, webhooks, integración con CRM propio y un servidor MCP. RosettaDMS se conecta por esos mismos canales:</p>
+        <ul>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>La recepcionista de Allo usa las herramientas MCP de RosettaDMS: <code>buscar_disponibilidad</code>, <code>agendar_cita</code>, <code>estatus_orden</code>.</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Los webhooks de Allo (llamada, SMS, resumen) entran al cerebro como eventos del cliente y del VIN.</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>RosettaDMS actúa como el CRM del dealer para Allo, con contactos e historial desde el DMS.</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Las automatizaciones del cerebro disparan llamadas y SMS salientes por la API de Allo.</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span>Se puede conservar el número actual del dealer con portabilidad.</span></li>
+        </ul>
+        <a href="https://www.withallo.com/es" target="_blank" rel="noopener" class="btn btn-line" style="align-self:flex-start">Conocer Allo <svg class="ico"><use href="#i-arrow"/></svg></a>
+        <p class="note">Allo es un proveedor independiente y su licencia se contrata por separado; la marca puede patrocinarla para su red. Los videos de esta sección son de Allo.</p>
+      </div>
+    </div>
+
+    <div class="videos">
+      <div class="vid reveal"><div class="frame" data-yt="mZzIjjBrfZc"><img loading="lazy" src="https://i.ytimg.com/vi/mZzIjjBrfZc/hqdefault.jpg" alt="Video de Allo: SMS ante llamada perdida"><span class="play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></div>
+        <div class="cap"><b>SMS ante llamada perdida</b><span>Cómo una llamada sin contestar se convierte en conversación.</span><small>VIDEO · ALLO</small></div></div>
+      <div class="vid reveal"><div class="frame" data-yt="8gLS3ekQYJ8"><img loading="lazy" src="https://i.ytimg.com/vi/8gLS3ekQYJ8/hqdefault.jpg" alt="Video de Allo: resúmenes con IA"><span class="play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></div>
+        <div class="cap"><b>Resúmenes con IA de cada llamada</b><span>Puntos clave, tareas y siguientes pasos al colgar.</span><small>VIDEO · ALLO</small></div></div>
+      <div class="vid reveal"><div class="frame" data-yt="GZ-dozt775A"><img loading="lazy" src="https://i.ytimg.com/vi/GZ-dozt775A/hqdefault.jpg" alt="Video de Allo: MCP en acción"><span class="play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></div>
+        <div class="cap"><b>El MCP de Allo en acción</b><span>Agentes de IA que trabajan sobre las llamadas y mensajes.</span><small>VIDEO · ALLO</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- IA / MCP -->
+<section id="ia" class="ai">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="label" style="color:var(--b)">05 · IA, MCP y automatización</div>
+      <h2>Hecho para que agentes de IA trabajen con toda tu red</h2>
+      <p>RosettaDMS expone la red completa como herramientas MCP (Model Context Protocol). Tu bot de WhatsApp, tu call center con IA, la recepcionista de Allo o un asistente interno pueden consultar y actuar en cualquier dealer sin saber qué DMS usa.</p>
     </div>
     <div class="ai-grid">
-      <div class="card reveal">
-        <h3 style="font-size:1.4rem">Herramientas MCP disponibles</h3>
-        <p style="color:var(--muted);margin-top:6px;font-size:.95rem">Un solo servidor MCP para toda la red. Cada llamada se resuelve contra el DMS del dealer correcto.</p>
+      <div class="box reveal">
+        <h3>Herramientas MCP</h3>
+        <p>Un servidor para toda la red. Cada llamada se resuelve contra el DMS del dealer correcto.</p>
         <div class="tools">
-          <div class="tool"><svg class="ico"><use href="#i-search"/></svg><div><code>buscar_disponibilidad</code><span>Horarios libres por dealer, código postal o VIN, según la capacidad real del taller.</span></div></div>
+          <div class="tool"><svg class="ico"><use href="#i-search"/></svg><div><code>buscar_disponibilidad</code><span>Horarios libres por dealer, código postal o VIN, con capacidad real del taller.</span></div></div>
           <div class="tool"><svg class="ico"><use href="#i-cal"/></svg><div><code>agendar_cita</code><span>Captura la cita en el DMS del dealer y devuelve el folio.</span></div></div>
-          <div class="tool"><svg class="ico"><use href="#i-car"/></svg><div><code>estatus_orden</code><span>Etapa actual de la orden de reparación y la hora estimada de entrega.</span></div></div>
+          <div class="tool"><svg class="ico"><use href="#i-car"/></svg><div><code>estatus_orden</code><span>Etapa actual de la orden de reparación y hora estimada de entrega.</span></div></div>
           <div class="tool"><svg class="ico"><use href="#i-box"/></svg><div><code>existencia_parte</code><span>Existencia por número de parte en el dealer y en dealers cercanos.</span></div></div>
           <div class="tool"><svg class="ico"><use href="#i-tag"/></svg><div><code>inventario_unidades</code><span>Unidades en piso por modelo, versión y color, con opción de apartar.</span></div></div>
-          <div class="tool"><svg class="ico"><use href="#i-doc"/></svg><div><code>historial_vin</code><span>Servicios, fallas y campañas pendientes del vehículo en toda la red.</span></div></div>
+          <div class="tool"><svg class="ico"><use href="#i-doc"/></svg><div><code>historial_vin</code><span>Servicios, fallas, llamadas y campañas pendientes del vehículo.</span></div></div>
         </div>
       </div>
-      <div style="display:grid;gap:20px">
-        <div class="code reveal"><span class="c">// Agente de WhatsApp de la marca → servidor MCP de RosettaDMS</span>
+      <div style="display:grid;gap:16px;min-width:0">
+        <div class="code reveal"><span class="c">// Recepcionista de Allo → MCP de RosettaDMS</span>
 <span class="k">call</span> <span class="n">buscar_disponibilidad</span>({
-  <span class="n">vin</span>: <span class="s">"3FTTW8E3XRRA04821"</span>,
-  <span class="n">servicio</span>: <span class="s">"mantenimiento_20k"</span>,
-  <span class="n">cp</span>: <span class="s">"64000"</span>
+  vin: <span class="s">"3FTTW8E3XRRA04821"</span>,
+  servicio: <span class="s">"mantenimiento_20k"</span>,
+  dealer: <span class="s">"MTY-02"</span>
 })
-<span class="c">// → resuelto en Dealer Motores Regios (DMS de escritorio, computer use)</span>
-{ <span class="n">dealer</span>: <span class="s">"MTY-02"</span>, <span class="n">slots</span>: [<span class="s">"2026-10-30T08:30"</span>, <span class="s">"2026-10-30T11:00"</span>],
-  <span class="n">partes</span>: { <span class="n">kit_filtros</span>: <span class="s">"en existencia"</span> } }
+<span class="c">// resuelto en Motores Regios · DMS de escritorio · computer use</span>
+{ slots: [<span class="s">"2026-10-30T08:30"</span>, <span class="s">"2026-10-30T11:00"</span>],
+  partes: { kit_filtros: <span class="s">"en existencia"</span> } }
 
-<span class="k">call</span> <span class="n">agendar_cita</span>({ <span class="n">dealer</span>: <span class="s">"MTY-02"</span>, <span class="n">slot</span>: <span class="s">"2026-10-30T08:30"</span>, <span class="n">reservar_partes</span>: <span class="k">true</span> })
-{ <span class="n">folio</span>: <span class="s">"CT-55821"</span>, <span class="n">capturada_en_dms</span>: <span class="k">true</span> }</div>
-        <div class="card reveal">
-          <h3 style="font-size:1.4rem">Automatizaciones del cerebro</h3>
-          <div class="auto-list">
-            <div class="rule"><span class="if">Si</span><span>una cita requiere una parte sin existencia en el dealer</span><span class="then">Entonces</span><span>se genera un pedido JIT al CEDIS más cercano y se avisa al asesor</span></div>
-            <div class="rule"><span class="if">Si</span><span>un lead lleva más de 15 minutos sin contacto</span><span class="then">Entonces</span><span>se escala al gerente y, a los 60 minutos, se reasigna</span></div>
-            <div class="rule"><span class="if">Si</span><span>un mismo código de falla aparece en 10 o más dealers en 7 días</span><span class="then">Entonces</span><span>se abre una alerta de calidad para ingeniería de la marca</span></div>
+<span class="k">call</span> <span class="n">agendar_cita</span>({ dealer: <span class="s">"MTY-02"</span>, slot: <span class="s">"08:30"</span>, reservar_partes: <span class="k">true</span> })
+{ folio: <span class="s">"CT-55821"</span>, capturada_en_dms: <span class="k">true</span> }</div>
+        <div class="box reveal">
+          <h3>Automatizaciones del cerebro</h3>
+          <div class="rules">
+            <div class="rl"><span class="if">Si</span><span>una cita requiere una parte sin existencia</span><span class="th">Entonces</span><span>se genera un pedido JIT al CEDIS y se avisa al asesor</span></div>
+            <div class="rl"><span class="if">Si</span><span>un lead lleva más de 15 minutos sin contacto</span><span class="th">Entonces</span><span>la IA de Allo llama al prospecto y escala al gerente</span></div>
+            <div class="rl"><span class="if">Si</span><span>la orden cambia a "listo para entrega"</span><span class="th">Entonces</span><span>se avisa al cliente por SMS o llamada</span></div>
+            <div class="rl"><span class="if">Si</span><span>un código de falla aparece en 10 o más dealers en 7 días</span><span class="th">Entonces</span><span>se abre una alerta de calidad para la marca</span></div>
           </div>
         </div>
       </div>
@@ -684,85 +843,58 @@ footer .logo{color:#fff}
 <section id="quejas">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">De la queja a la solución</span>
+      <div class="label" style="color:var(--b)">06 · De la queja a la solución</div>
       <h2>Las quejas más comunes en agencias y cómo las resolvemos</h2>
       <p>Casi todas tienen el mismo origen: la información existe en el DMS, pero no llega a tiempo a quien la necesita.</p>
     </div>
     <table class="ctable reveal">
       <thead><tr><th>Lo que dice el cliente</th><th>Lo que hace RosettaDMS</th></tr></thead>
       <tbody>
-        <tr><td><span class="area">Citas</span>"Nadie contesta el teléfono para agendar."</td><td><b>Agenda 24/7 por WhatsApp y agentes IA</b> conectada a la agenda real del taller, con la cita capturada al momento en el DMS.</td></tr>
-        <tr><td><span class="area">Citas</span>"Llegué a mi cita y me hicieron esperar dos horas."</td><td><b>Balanceo de capacidad:</b> solo se ofrecen horarios con técnico y bahía disponibles, más recordatorio y registro previo.</td></tr>
-        <tr><td><span class="area">Posventa</span>"No tenían la pieza, tuve que regresar."</td><td><b>Pre-picking y pedido JIT</b> según VIN y síntoma desde que se agenda.</td></tr>
-        <tr><td><span class="area">Posventa</span>"Me dijeron que estaba listo y no."</td><td><b>Estatus en vivo</b> tomado de la orden de reparación, con avisos en cada cambio.</td></tr>
+        <tr><td><span class="area">Citas</span>"Nadie contesta el teléfono para agendar."</td><td><b>Recepcionista IA con Allo</b> que contesta 24/7 y agenda contra la agenda real del taller, además de WhatsApp y agentes por MCP.</td></tr>
+        <tr><td><span class="area">Atención</span>"Dejé mensaje y nunca me regresaron la llamada."</td><td><b>SMS ante llamada perdida</b> al instante y devolución de llamada automática.</td></tr>
+        <tr><td><span class="area">Citas</span>"Llegué a mi cita y me hicieron esperar dos horas."</td><td><b>Balanceo de capacidad:</b> solo se ofrecen horarios con técnico y bahía libres.</td></tr>
+        <tr><td><span class="area">Posventa</span>"No tenían la pieza, tuve que regresar."</td><td><b>Pre-picking y pedido JIT</b> por VIN y síntoma desde que se agenda.</td></tr>
+        <tr><td><span class="area">Posventa</span>"Me dijeron que estaba listo y no."</td><td><b>Estatus en vivo</b> desde la orden, con aviso por SMS o llamada en cada cambio.</td></tr>
         <tr><td><span class="area">Posventa</span>"Me cobraron más de lo que me cotizaron."</td><td><b>Aprobación digital</b> de trabajos adicionales con evidencia y precio.</td></tr>
-        <tr><td><span class="area">Posventa</span>"Tuve un recall y nadie me avisó."</td><td><b>Campañas proactivas por VIN</b> con cita propuesta y pieza asignada.</td></tr>
-        <tr><td><span class="area">Ventas</span>"Pedí información y nunca me llamaron."</td><td><b>Vigilancia del SLA de leads</b> con escalamiento y reasignación automática.</td></tr>
-        <tr><td><span class="area">Ventas</span>"El auto de la web ya no existía."</td><td><b>Inventario verificado</b> desde el DMS y apartado de unidades desde el chat.</td></tr>
-        <tr><td><span class="area">Atención</span>"Cada vez que llamo tengo que explicar todo otra vez."</td><td><b>Historial unificado por VIN</b> disponible en cualquier canal y en cualquier dealer.</td></tr>
-        <tr><td><span class="area">Garantía</span>"Mi garantía tardó semanas en autorizarse."</td><td><b>Pre-validación de garantía</b> y envío completo desde el primer intento.</td></tr>
+        <tr><td><span class="area">Posventa</span>"Tuve un recall y nadie me avisó."</td><td><b>Campañas proactivas por VIN</b>, con llamada saliente y cita propuesta.</td></tr>
+        <tr><td><span class="area">Ventas</span>"Pedí información y nunca me llamaron."</td><td><b>Vigilancia del SLA de leads</b>: si se vence, la IA llama al prospecto.</td></tr>
+        <tr><td><span class="area">Ventas</span>"El auto de la web ya no existía."</td><td><b>Inventario verificado</b> desde el DMS y apartado desde el chat.</td></tr>
+        <tr><td><span class="area">Atención</span>"Cada vez que llamo tengo que explicar todo otra vez."</td><td><b>Historial unificado por VIN</b>, con resúmenes de llamadas anteriores, en cualquier canal.</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <!-- DEMO -->
-<section id="demo" class="soft">
+<section id="demo" class="demo">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Demo</span>
-      <h2>La consola del concentrador, <span class="hl">en vivo</span></h2>
-      <p>Así ve la marca su red cuando todos los dealers hablan el mismo idioma. Diez dealers con cuatro tipos de DMS distintos, conectados por API, por computer use o en modo híbrido. Haz clic en cualquier dealer para ver su detalle.</p>
+      <div class="label" style="color:var(--b)">07 · Demo</div>
+      <h2>La consola del concentrador, en vivo</h2>
+      <p>Diez dealers ficticios con cuatro tipos de DMS, conectados por API, computer use o en modo híbrido, y con la recepcionista de voz activa. Filtra por región o conector y haz clic en un dealer para ver su detalle.</p>
     </div>
-
-    <div class="demo-shell reveal">
-      <div class="demo-bar">
-        <div style="display:flex;align-items:center;gap:14px"><div class="dots"><i></i><i></i><i></i></div><span class="mono">consola.rosettadms / red-nacional</span></div>
-        <span class="live" id="clock">Sincronizado</span>
-      </div>
-      <div class="demo-body">
-        <div class="demo-tools">
-          <div class="seg" id="fRegion">
-            <button class="on" data-v="Todas">Todas</button><button data-v="Norte">Norte</button><button data-v="Centro">Centro</button><button data-v="Bajío">Bajío</button><button data-v="Occidente">Occidente</button><button data-v="Sureste">Sureste</button>
-          </div>
-          <div class="seg" id="fConn">
-            <button class="on" data-v="Todos">Todos los conectores</button><button data-v="API">API</button><button data-v="Computer use">Computer use</button><button data-v="Híbrido">Híbrido</button>
-          </div>
+    <div class="shell reveal">
+      <div class="shell-bar"><div style="display:flex;align-items:center;gap:14px"><div class="sq"><i></i><i></i><i></i></div><span class="mono">consola.rosettadms / red-nacional</span></div><span class="live" id="clock">SINCRONIZADO</span></div>
+      <div class="shell-body">
+        <div class="tools-row">
+          <div class="seg" id="fRegion"><button class="on" data-v="Todas">Todas</button><button data-v="Norte">Norte</button><button data-v="Centro">Centro</button><button data-v="Bajío">Bajío</button><button data-v="Occidente">Occidente</button><button data-v="Sureste">Sureste</button></div>
+          <div class="seg" id="fConn"><button class="on" data-v="Todos">Todos</button><button data-v="API">API</button><button data-v="Computer use">Computer use</button><button data-v="Híbrido">Híbrido</button></div>
         </div>
-
         <div class="kpis" id="kpis"></div>
-
-        <div class="demo-main">
+        <div class="dm">
           <div class="panel">
-            <div class="panel-h">Dealers conectados <small id="cnt"></small></div>
-            <div class="tbl-wrap">
-              <table class="dl">
-                <thead><tr><th>Dealer</th><th>DMS</th><th>Conector</th><th>Última sync</th><th>Citas hoy</th><th>OR abiertas</th><th>Detenidos x parte</th><th>Ocupación</th><th>NPS</th></tr></thead>
-                <tbody id="rows"></tbody>
-              </table>
-            </div>
+            <div class="ph">Dealers conectados <small id="cnt"></small></div>
+            <div class="tbl"><table class="dl"><thead><tr><th>Dealer</th><th>DMS</th><th>Conector</th><th>Última sync</th><th>Citas hoy</th><th>OR abiertas</th><th>Detenidos</th><th>Ocupación</th><th>Llamadas IA</th><th>NPS</th></tr></thead><tbody id="rows"></tbody></table></div>
           </div>
           <div class="panel" id="detail"></div>
         </div>
-
-        <div class="demo-low">
-          <div class="panel">
-            <div class="panel-h">Actividad de los conectores <small>tiempo real</small></div>
-            <div class="feed" id="feed"></div>
-          </div>
-          <div class="panel">
-            <div class="panel-h">Pregúntale al cerebro <small>lenguaje natural</small></div>
-            <div class="ask">
-              <div class="qs" id="qs"></div>
-              <div class="answer" id="answer"></div>
-            </div>
-          </div>
-          <div class="panel">
-            <div class="panel-h">Tráfico MCP <small>agentes de la marca</small></div>
-            <div class="mcp-log" id="mcp"></div>
-          </div>
+        <div class="dl2">
+          <div class="panel"><div class="ph">Citas por hora y dealer <small>HOY · 08 A 19 H</small></div><div class="hm"><div class="hm-grid" id="hm"></div><div class="hm-leg"><span><i style="background:#dfe7ff"></i>baja</span><span><i style="background:#6e93ff"></i>media</span><span><i style="background:#003ffe"></i>alta</span><span><i style="background:#f3fb09;outline:1px solid #141414"></i>saturada</span></div></div></div>
+          <div class="panel"><div class="ph">Actividad de conectores y voz <small>TIEMPO REAL</small></div><div class="feed" id="feed"></div></div>
+          <div class="panel"><div class="ph">Pregúntale al cerebro <small>LENGUAJE NATURAL</small></div><div class="ask"><div class="qs" id="qs"></div><div class="answer" id="answer"></div></div></div>
+          <div class="panel"><div class="ph">Tráfico MCP <small>AGENTES Y VOZ</small></div><div class="mcp" id="mcp"></div></div>
         </div>
-        <p class="demo-note">Dealers, DMS y cifras ficticios, solo para demostración.</p>
+        <p class="dnote">DEALERS, DMS Y CIFRAS FICTICIOS · SOLO PARA DEMOSTRACIÓN</p>
       </div>
     </div>
   </div>
@@ -771,50 +903,35 @@ footer .logo{color:#fff}
 <!-- VALOR -->
 <section id="valor">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Ganar · ganar · ganar</span>
+    <div class="sec-head reveal">
+      <div class="label" style="color:var(--b)">08 · Ganar · ganar · ganar</div>
       <h2>Una solución que conviene a los tres lados</h2>
     </div>
-    <div class="grid3 aud">
-      <div class="card reveal">
-        <span class="eyebrow">Marca</span>
-        <h3>Visibilidad y control</h3>
-        <ul><li>Datos diarios de toda la red en tu data lake</li><li>Pedidos de partes JIT predictivos</li><li>Alerta temprana de calidad y garantías</li><li>Bots y agentes que agendan en cualquier dealer</li><li>Sin depender de proveedores de DMS</li></ul>
-        <div class="price">Por dealer conectado<small>Suscripción mensual a cargo de la marca</small></div>
-      </div>
-      <div class="card reveal">
-        <span class="eyebrow">Dealer</span>
-        <h3>Más clientes, menos captura</h3>
-        <ul><li>Cero costo y cero instalación</li><li>Citas nuevas directo en su DMS</li><li>Piezas a tiempo y menos autos detenidos</li><li>Fin de la doble captura en portales</li><li>Revoca el acceso cuando quiera</li></ul>
-        <div class="price">$0<small>Siempre gratis para el dealer</small></div>
-      </div>
-      <div class="card reveal">
-        <span class="eyebrow">Cliente final</span>
-        <h3>Servicio rápido y claro</h3>
-        <ul><li>Agenda por WhatsApp en segundos, 24/7</li><li>Sabe en todo momento cómo va su auto</li><li>Pieza lista desde que llega</li><li>Precio aprobado antes de pagar</li><li>Respuesta rápida al comprar un auto</li></ul>
-        <div class="price">Más satisfacción<small>Mejor NPS en servicio, ventas y refacciones</small></div>
-      </div>
+    <div class="vtrio">
+      <div class="vt vt-y reveal"><span class="lbl">Marca</span><h3>Visibilidad y control</h3><ul><li>Datos diarios de toda la red en tu data lake</li><li>Pedidos de partes JIT predictivos</li><li>Alerta temprana de calidad</li><li>Bots, agentes y voz que agendan en cualquier dealer</li><li>Sin depender de proveedores de DMS</li></ul><div class="big">SaaS</div><div class="bl">por dealer conectado, pagado por la marca</div></div>
+      <div class="vt vt-b reveal"><span class="lbl" style="color:var(--y)">Dealer</span><h3>Más clientes, menos captura</h3><ul><li>Cero costo de RosettaDMS y cero instalación</li><li>Citas nuevas directo en su DMS</li><li>Ninguna llamada sin contestar</li><li>Piezas a tiempo, menos autos detenidos</li><li>Revoca el acceso cuando quiera</li></ul><div class="big">$0</div><div class="bl">siempre gratis para el dealer</div></div>
+      <div class="vt vt-w reveal"><span class="lbl" style="color:var(--b)">Cliente final</span><h3>Servicio rápido y claro</h3><ul><li>Agenda por teléfono o WhatsApp, 24/7</li><li>Sabe en todo momento cómo va su auto</li><li>Pieza lista desde que llega</li><li>Precio aprobado antes de pagar</li><li>Respuesta inmediata al comprar</li></ul><div class="big">NPS+</div><div class="bl">en servicio, ventas y refacciones</div></div>
     </div>
   </div>
 </section>
 
 <!-- SEGURIDAD -->
-<section id="seguridad" class="soft">
+<section id="seguridad" class="sec">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Seguridad y gobierno</span>
+      <div class="label" style="color:var(--y)">09 · Seguridad y gobierno</div>
       <h2>El dealer mantiene el control. Siempre.</h2>
-      <p>Mínimo privilegio y trazabilidad total. Cada acción de un agente o de la API queda registrada y es auditable.</p>
+      <p>Mínimo privilegio y trazabilidad total. Cada acción de un agente, de la API o de la capa de voz queda registrada y es auditable.</p>
     </div>
-    <div class="sec-grid">
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-key"/></svg><h4>Usuario dedicado</h4><p>El dealer define permisos y lo revoca en un clic desde su propio DMS.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-lock"/></svg><h4>Bóveda de credenciales</h4><p>Credenciales cifradas, rotables y nunca visibles para personas.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-video"/></svg><h4>Sesiones grabadas</h4><p>Cada sesión de computer use se graba con capturas y registro de acciones.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-shield"/></svg><h4>Privacidad</h4><p>Conforme a la LFPDPPP, con datos personales minimizados y seudonimizados hacia la marca.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-check-sq"/></svg><h4>Escritura con reglas</h4><p>Citas y reservas con límites, validaciones y aprobación configurable.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-clock"/></svg><h4>Horarios acordados</h4><p>Extracciones pesadas fuera del horario operativo del dealer.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-eye"/></svg><h4>Transparencia</h4><p>El dealer ve qué se comparte y con quién, con contratos claros de uso.</p></div>
-      <div class="sec-item reveal"><svg class="ico"><use href="#i-refresh"/></svg><h4>Resiliencia</h4><p>Si cambia una pantalla, el agente se adapta y el playbook se actualiza.</p></div>
+    <div class="sgrid reveal">
+      <div class="si"><svg class="ico"><use href="#i-key"/></svg><h4>Usuario dedicado</h4><p>El dealer define los permisos y lo revoca en un clic desde su DMS.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-lock"/></svg><h4>Bóveda de credenciales</h4><p>Credenciales cifradas, rotables y nunca visibles para personas.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-video"/></svg><h4>Sesiones grabadas</h4><p>Cada sesión de computer use queda grabada con su registro de acciones.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-shield"/></svg><h4>Privacidad</h4><p>LFPDPPP, aviso de grabación en llamadas y datos seudonimizados hacia la marca.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-check-sq"/></svg><h4>Escritura con reglas</h4><p>Citas y reservas con límites, validaciones y aprobación configurable.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-clock"/></svg><h4>Horarios acordados</h4><p>Extracciones pesadas fuera del horario operativo.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-eye"/></svg><h4>Transparencia</h4><p>El dealer ve qué se comparte y con quién.</p></div>
+      <div class="si"><svg class="ico"><use href="#i-refresh"/></svg><h4>Resiliencia</h4><p>Si cambia una pantalla, el agente se adapta y el playbook se actualiza.</p></div>
     </div>
   </div>
 </section>
@@ -822,76 +939,65 @@ footer .logo{color:#fff}
 <!-- PLANES -->
 <section id="planes">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Modelo SaaS para marcas</span>
+    <div class="sec-head reveal">
+      <div class="label" style="color:var(--b)">10 · Modelo SaaS para marcas</div>
       <h2>Empieza con un piloto y escala a toda la red</h2>
-      <p>El dealer nunca paga. La marca contrata por dealer conectado.</p>
+      <p>El dealer nunca paga RosettaDMS. La marca contrata por dealer conectado.</p>
     </div>
-    <div class="grid3">
-      <div class="card plan reveal">
-        <span class="pt">Piloto</span><h3>30 días</h3><p>Valida el modelo con 4 dealers y 4 DMS distintos.</p>
-        <ul><li>4 dealers, 4 tipos de DMS</li><li>API, computer use e híbrido</li><li>Sincronización diaria de servicio, partes e inventario</li><li>Consola del concentrador</li><li>Entrega por API o CSV</li></ul>
-        <a href="#contacto" class="btn btn-line">Iniciar piloto</a>
-      </div>
-      <div class="card plan hot reveal">
-        <span class="pt">Más elegido</span><h3>Red Nacional</h3><p>Toda la red conectada y bidireccional.</p>
-        <ul><li>Dealers ilimitados</li><li>Sincronización cada hora</li><li>Citas y consultas por API, WhatsApp y MCP</li><li>Orden JIT predictiva</li><li>Cerebro con consultas en lenguaje natural</li></ul>
-        <a href="#contacto" class="btn btn-o">Hablar con ventas</a>
-      </div>
-      <div class="card plan reveal">
-        <span class="pt">Enterprise</span><h3>A la medida</h3><p>Para armadoras multimarca o multipaís.</p>
-        <ul><li>Despliegue en tu nube</li><li>Conectores a S3, BigQuery, Snowflake y Azure</li><li>SLA dedicado y SSO</li><li>Modelos predictivos personalizados</li></ul>
-        <a href="#contacto" class="btn btn-line">Contactar</a>
-      </div>
+    <div class="plans">
+      <div class="plan reveal"><span class="pt">Piloto</span><h3>30 días</h3><p>4 dealers con 4 DMS distintos.</p><ul><li>API, computer use e híbrido</li><li>Sincronización diaria de servicio, partes e inventario</li><li>Consola del concentrador</li><li>Recepcionista de voz en 1 dealer (opcional)</li><li>Entrega por API o CSV</li></ul><a href="#contacto" class="btn btn-line">Iniciar piloto</a></div>
+      <div class="plan hot reveal"><span class="pt">Más elegido</span><h3>Red Nacional</h3><p>Toda la red conectada y bidireccional.</p><ul><li>Dealers ilimitados</li><li>Sincronización cada hora</li><li>Citas por API, WhatsApp, voz y MCP</li><li>Orden JIT predictiva</li><li>Cerebro con consultas en lenguaje natural</li></ul><a href="#contacto" class="btn btn-y">Hablar con ventas</a></div>
+      <div class="plan reveal"><span class="pt">Enterprise</span><h3>A la medida</h3><p>Armadoras multimarca o multipaís.</p><ul><li>Despliegue en tu nube</li><li>Conectores a S3, BigQuery, Snowflake y Azure</li><li>SLA dedicado y SSO</li><li>Modelos predictivos personalizados</li></ul><a href="#contacto" class="btn btn-line">Contactar</a></div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="soft">
+<section id="faq" style="padding-top:20px">
   <div class="wrap">
-    <div class="sec-head center reveal"><span class="eyebrow">Preguntas frecuentes</span><h2>Lo que nos preguntan marcas y dealers</h2></div>
+    <div class="sec-head reveal"><div class="label" style="color:var(--b)">11 · Preguntas frecuentes</div><h2>Lo que nos preguntan marcas y dealers</h2></div>
     <div class="faq">
-      <details><summary>¿Cuándo usan API y cuándo computer use?</summary><p>Siempre que el DMS ofrezca una API o exportación automatizada, la usamos porque es más rápida y estable. Si no existe o no cubre todo lo necesario, el agente de computer use opera la interfaz del DMS. Muchos dealers terminan en modo híbrido.</p></details>
-      <details><summary>¿Necesito que mi proveedor de DMS haga algo?</summary><p>Con computer use, no: el agente usa el DMS con un usuario normal, como un empleado. Con API, solo se necesitan las credenciales. Recomendamos que el dealer revise las condiciones de su licencia respecto a usuarios adicionales o automatizados.</p></details>
-      <details><summary>¿Cuánto tarda en conectarse un dealer?</summary><p>Si su DMS ya tiene playbook o adaptador, minutos. Si es un DMS nuevo, el agente lo mapea normalmente en uno o dos días, y a partir de ahí cualquier dealer con ese DMS se conecta al instante.</p></details>
-      <details><summary>¿Qué pasa si el DMS cambia de versión o de pantallas?</summary><p>El agente trabaja con visión, no con coordenadas fijas. Detecta el cambio, se adapta y actualiza el playbook. Si algo requiere intervención, operaciones recibe una alerta antes de perder una sincronización.</p></details>
-      <details><summary>¿Por qué es gratis para el dealer?</summary><p>Porque el principal beneficiario de la visibilidad de la red es la marca, que es quien contrata la suscripción. El dealer gana citas, piezas a tiempo y menos captura sin poner un peso.</p></details>
-      <details><summary>¿Qué es MCP y por qué importa?</summary><p>Model Context Protocol es un estándar abierto para que los agentes de IA usen herramientas externas. Con nuestro servidor MCP, cualquier agente compatible puede agendar, consultar estatus o buscar partes en toda tu red sin una integración por dealer.</p></details>
+      <details><summary>¿Cuándo usan API y cuándo computer use?</summary><p>Si el DMS ofrece API o exportación automatizada, la usamos porque es más rápida y estable. Si no existe o no cubre todo, el agente de computer use opera la interfaz. Muchos dealers terminan en modo híbrido.</p></details>
+      <details><summary>¿Necesito que mi proveedor de DMS haga algo?</summary><p>Con computer use, no: el agente usa el DMS con un usuario normal. Con API, solo hacen falta las credenciales. Recomendamos que el dealer revise las condiciones de su licencia respecto a usuarios adicionales o automatizados.</p></details>
+      <details><summary>¿Qué hace Allo y cuánto cuesta?</summary><p>Allo es un proveedor independiente de telefonía con agentes de IA: contesta llamadas, envía SMS ante llamadas perdidas, hace llamadas salientes y resume cada conversación. RosettaDMS le da el contexto del DMS para que resuelva en la llamada. La licencia de Allo se contrata por separado y la puede patrocinar la marca para su red.</p></details>
+      <details><summary>¿El dealer puede conservar su número de teléfono?</summary><p>Sí. Allo permite portar el número actual, así los clientes siguen llamando al mismo número de siempre.</p></details>
+      <details><summary>¿Cuánto tarda en conectarse un dealer?</summary><p>Si su DMS ya tiene playbook o adaptador, minutos. Si es nuevo, el agente lo mapea normalmente en uno o dos días, y a partir de ahí cualquier dealer con ese DMS se conecta al instante.</p></details>
+      <details><summary>¿Qué es MCP y por qué importa?</summary><p>Model Context Protocol es un estándar abierto para que los agentes de IA usen herramientas externas. Con el MCP de RosettaDMS, cualquier agente compatible, incluida la recepcionista de voz, puede agendar, consultar estatus o buscar partes en toda tu red.</p></details>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section id="contacto">
-  <div class="wrap">
-    <div class="cta-box reveal">
-      <div>
-        <h2>Pilotea RosettaDMS con 4 dealers en 30 días</h2>
-        <p>Elige cuatro dealers con DMS distintos. Te mostramos el primero conectado en la primera semana y la consola completa al final del mes.</p>
-        <div class="checks"><span><svg class="ico"><use href="#i-check"/></svg>Sin costo para los dealers</span><span><svg class="ico"><use href="#i-check"/></svg>Sin modificar sus DMS</span><span><svg class="ico"><use href="#i-check"/></svg>Datos en tu data lake</span></div>
-      </div>
-      <form id="leadform">
-        <div class="row2"><input name="nombre" placeholder="Nombre" required><input name="empresa" placeholder="Marca / empresa" required></div>
-        <div class="row2"><input name="email" type="email" placeholder="Correo corporativo" required><input name="tel" placeholder="Teléfono / WhatsApp"></div>
-        <select name="perfil" required><option value="">Soy…</option><option>Marca / Armadora</option><option>Grupo de dealers</option><option>Dealer individual</option><option>Proveedor / Partner</option></select>
-        <textarea name="mensaje" placeholder="¿Cuántos dealers y qué DMS usan?"></textarea>
-        <button class="btn btn-o" type="submit" style="justify-content:center">Solicitar piloto</button>
-        <span class="form-ok" id="formok">Gracias. Se abrió tu cliente de correo para enviar la solicitud.</span>
-      </form>
+<section id="contacto" class="cta">
+  <div class="disp giant" aria-hidden="true">Piloto</div>
+  <div class="wrap cta-grid">
+    <div>
+      <div class="label">12 · Piloto en 30 días</div>
+      <h2>Pilotea RosettaDMS con 4 dealers y 4 DMS distintos</h2>
+      <p>Te mostramos el primer dealer conectado en la primera semana, la consola completa al final del mes y, si quieres, la recepcionista de voz atendiendo llamadas reales.</p>
+      <div class="cks"><span><svg class="ico"><use href="#i-check"/></svg>Sin costo de RosettaDMS para los dealers</span><span><svg class="ico"><use href="#i-check"/></svg>Sin modificar sus DMS</span><span><svg class="ico"><use href="#i-check"/></svg>Datos en tu data lake</span></div>
     </div>
+    <form id="leadform">
+      <div class="row2"><input name="nombre" placeholder="Nombre" required><input name="empresa" placeholder="Marca / empresa" required></div>
+      <div class="row2"><input name="email" type="email" placeholder="Correo corporativo" required><input name="tel" placeholder="Teléfono / WhatsApp"></div>
+      <select name="perfil" required><option value="">Soy…</option><option>Marca / Armadora</option><option>Grupo de dealers</option><option>Dealer individual</option><option>Proveedor / Partner</option></select>
+      <textarea name="mensaje" placeholder="¿Cuántos dealers y qué DMS usan?"></textarea>
+      <button class="btn btn-b" type="submit" style="justify-content:center">Solicitar piloto <svg class="ico"><use href="#i-arrow"/></svg></button>
+      <span class="form-ok" id="formok">Gracias. Se abrió tu cliente de correo para enviar la solicitud.</span>
+    </form>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     <div class="foot">
-      <div><div class="logo" style="margin-bottom:12px">Rosetta<b>DMS</b></div><p>La piedra Rosetta de los DMS automotrices. Un producto de MenteIA.</p></div>
-      <div><h5>Producto</h5><a href="#como">Cómo funciona</a><a href="#funciones">Funciones</a><a href="#ia">IA y MCP</a><a href="#demo">Demo</a></div>
+      <div><span class="logo on-dark" style="margin-bottom:14px"><svg class="mk" style="background:#fff;padding:2px"><use href="#rmark"/></svg><span class="wm"><b>rosetta</b><small>DMS</small></span></span><p>La piedra Rosetta de los DMS automotrices. Un producto de MenteIA.</p></div>
+      <div><h5>Producto</h5><a href="#como">Cómo funciona</a><a href="#funciones">Funciones</a><a href="#voz">Voz con Allo</a><a href="#ia">IA y MCP</a><a href="#demo">Demo</a></div>
       <div><h5>Soluciones</h5><a href="#valor">Para marcas</a><a href="#valor">Para dealers</a><a href="#quejas">Experiencia del cliente</a><a href="#seguridad">Seguridad</a></div>
       <div><h5>Empresa</h5><a href="#planes">Planes</a><a href="#faq">Preguntas frecuentes</a><a href="#contacto">Contacto</a></div>
     </div>
-    <div class="foot-b"><span>© <span id="yr"></span> MenteIA. Todos los derechos reservados.</span><span>rosettadms.menteia.com</span></div>
+    <div class="foot-big" aria-hidden="true">rosetta</div>
+    <div class="foot-b"><span>© <span id="yr"></span> MENTEIA</span><span>Allo es marca de su respectivo titular.</span><span>ROSETTADMS.MENTEIA.COM</span></div>
   </div>
 </footer>
 
@@ -899,11 +1005,9 @@ footer .logo{color:#fff}
 const CONTACT_EMAIL = "contacto@menteia.com";
 document.getElementById("yr").textContent = new Date().getFullYear();
 
-// reveal on scroll
-const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target);} }),{threshold:.1});
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target);} }),{threshold:.08});
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 
-// lead form -> mailto
 document.getElementById("leadform").addEventListener("submit", e=>{
   e.preventDefault();
   const f = new FormData(e.target);
@@ -912,167 +1016,194 @@ document.getElementById("leadform").addEventListener("submit", e=>{
   document.getElementById("formok").style.display = "block";
 });
 
+// YouTube click-to-load
+document.querySelectorAll(".frame[data-yt]").forEach(fr=>fr.addEventListener("click",()=>{
+  fr.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${fr.dataset.yt}?autoplay=1&rel=0" title="Video de Allo" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+}));
+
+// hero heatmap
+(function(){
+  const h = document.getElementById("heroHeat"); const peaks = new Set([4,9,15,16,27,33,38,40,51,57]);
+  for(let i=0;i<72;i++){ const el=document.createElement("i"); const v=(Math.sin(i*1.7)+1)/2;
+    el.style.background = peaks.has(i) ? "#f3fb09" : `rgba(255,255,255,${.12+v*.38})`; h.appendChild(el); }
+})();
+
+// simulated call
+(function(){
+  const box = document.getElementById("callLines");
+  const L = [
+    ["cu","Cliente","Hola, quiero agendar el servicio de 20 mil de mi pickup."],
+    ["ai","Recepcionista IA","Claro. Veo que llama desde el número registrado de Juan Pérez, VIN terminación 4821. Permítame revisar la agenda del taller.","buscar_disponibilidad · MTY-02"],
+    ["ai","Recepcionista IA","Tengo mañana a las 8:30 o a las 11:00. El kit de filtros está en existencia. ¿Cuál le acomoda?"],
+    ["cu","Cliente","A las 8:30. ¿Y cuánto me va a salir?"],
+    ["ai","Recepcionista IA","El paquete de 20 mil km es de $3,450. Le confirmo la cita para mañana a las 8:30 y le aparto las piezas. Le llega un SMS con el folio.","agendar_cita · folio CT-55821 · capturada en DMS"],
+    ["ai","Resumen","Cita de servicio 20k agendada. Cliente sensible al precio; ofrecer paquete de frenos en recepción.","resumen · historial VIN"],
+  ];
+  let i=0;
+  function next(){
+    if(i>=L.length){ setTimeout(()=>{ box.innerHTML=""; i=0; next(); },5000); return; }
+    const [c,sp,t,tool]=L[i++]; const d=document.createElement("div"); d.className="ln "+c;
+    d.innerHTML=`<span class="sp">${sp}</span>${t}${tool?`<br><span class="tool">${tool}</span>`:""}`; box.appendChild(d);
+    setTimeout(next, c==="ai"?2600:1700);
+  }
+  next();
+})();
+
 /* ---------- DEMO: fictional dealer network ---------- */
 const DEALERS = [
-  {id:"CDMX-01",name:"Autos del Valle",city:"Ciudad de México",region:"Centro",dms:"NovaDMS Cloud",conn:"API",sync:2,status:"ok",citas:46,or:71,det:3,occ:88,nps:74,leads:94,rows:18240,
+  {id:"CDMX-01",name:"Autos del Valle",city:"Ciudad de México",region:"Centro",dms:"NovaDMS Cloud",conn:"API",sync:2,status:"ok",citas:46,or:71,det:3,occ:88,nps:74,leads:94,calls:63,rows:18240,
    parts:[["Pastillas de freno del.","4 OR esperando · 0 en existencia"],["Sensor ABS tras.","2 OR · llega mañana"]],jit:"Pedir 12 juegos de pastillas al CEDIS Centro antes de las 14:00 cubre las 9 citas de frenos de la semana."},
-  {id:"MTY-02",name:"Motores Regios",city:"Monterrey",region:"Norte",dms:"DealerSuite Desktop",conn:"Computer use",sync:14,status:"ok",citas:52,or:83,det:6,occ:93,nps:69,leads:81,rows:22105,
-   parts:[["Kit de filtros 20k","11 citas mañana · 4 en existencia"],["Bomba de agua","3 OR detenidas"]],jit:"Taller al 93 %: abrir sábado y pedir 8 kits de filtros. Hay 3 autos detenidos por bomba de agua; el dealer Frontera tiene 2 en existencia para traspaso."},
-  {id:"GDL-03",name:"Grupo Tapatío Automotriz",city:"Guadalajara",region:"Occidente",dms:"Terminal AS/400",conn:"Computer use",sync:38,status:"ok",citas:39,or:58,det:2,occ:76,nps:72,leads:88,rows:15730,
-   parts:[["Batería 60Ah","5 citas · 9 en existencia"],["Amortiguador del.","1 OR esperando"]],jit:"Abasto sano. Sugerencia: reducir el inventario envejecido de faros (14 piezas sin movimiento en 120 días)."},
-  {id:"MID-04",name:"Peninsular Motors",city:"Mérida",region:"Sureste",dms:"Sistema propio",conn:"Computer use",sync:61,status:"warn",citas:21,or:34,det:4,occ:64,nps:66,leads:72,rows:7410,
-   parts:[["Compresor de A/C","4 OR · 0 en existencia"],["Filtro de cabina","alta demanda regional"]],jit:"Fallas de A/C un 38 % por encima de lo normal en el Sureste. Pedir 6 compresores y 40 filtros de cabina al CEDIS Sureste."},
-  {id:"LEO-05",name:"Bajío Automotriz",city:"León",region:"Bajío",dms:"NovaDMS Cloud",conn:"API",sync:1,status:"ok",citas:34,or:49,det:1,occ:81,nps:77,leads:96,rows:12960,
-   parts:[["Aceite 5W-30 (L)","consumo +12 % semanal"],["Banda de distribución","2 citas · 2 en existencia"]],jit:"Sin riesgos. El dealer con mejor NPS de la región; sirve como referencia de procesos."},
-  {id:"QRO-06",name:"Queretana de Autos",city:"Querétaro",region:"Bajío",dms:"DealerSuite Desktop",conn:"Computer use",sync:22,status:"ok",citas:31,or:47,det:5,occ:90,nps:70,leads:79,rows:11880,
+  {id:"MTY-02",name:"Motores Regios",city:"Monterrey",region:"Norte",dms:"DealerSuite Desktop",conn:"Computer use",sync:14,status:"ok",citas:52,or:83,det:6,occ:93,nps:69,leads:81,calls:88,rows:22105,
+   parts:[["Kit de filtros 20k","11 citas mañana · 4 en existencia"],["Bomba de agua","3 OR detenidas"]],jit:"Taller al 93 %: abrir sábado y pedir 8 kits de filtros. Hay 3 autos detenidos por bomba de agua; Frontera Motors tiene 2 en existencia para traspaso."},
+  {id:"GDL-03",name:"Grupo Tapatío Automotriz",city:"Guadalajara",region:"Occidente",dms:"Terminal AS/400",conn:"Computer use",sync:38,status:"ok",citas:39,or:58,det:2,occ:76,nps:72,leads:88,calls:51,rows:15730,
+   parts:[["Batería 60Ah","5 citas · 9 en existencia"],["Amortiguador del.","1 OR esperando"]],jit:"Abasto sano. Reducir el inventario envejecido de faros (14 piezas sin movimiento en 120 días)."},
+  {id:"MID-04",name:"Peninsular Motors",city:"Mérida",region:"Sureste",dms:"Sistema propio",conn:"Computer use",sync:61,status:"warn",citas:21,or:34,det:4,occ:64,nps:66,leads:72,calls:34,rows:7410,
+   parts:[["Compresor de A/C","4 OR · 0 en existencia"],["Filtro de cabina","alta demanda regional"]],jit:"Fallas de A/C un 38 % por encima de lo normal en el Sureste; 9 clientes lo mencionaron por teléfono esta semana. Pedir 6 compresores y 40 filtros."},
+  {id:"LEO-05",name:"Bajío Automotriz",city:"León",region:"Bajío",dms:"NovaDMS Cloud",conn:"API",sync:1,status:"ok",citas:34,or:49,det:1,occ:81,nps:77,leads:96,calls:42,rows:12960,
+   parts:[["Aceite 5W-30 (L)","consumo +12 % semanal"],["Banda de distribución","2 citas · 2 en existencia"]],jit:"Sin riesgos. Mejor NPS de la región; sirve como referencia de procesos."},
+  {id:"QRO-06",name:"Queretana de Autos",city:"Querétaro",region:"Bajío",dms:"DealerSuite Desktop",conn:"Computer use",sync:22,status:"ok",citas:31,or:47,det:5,occ:90,nps:70,leads:79,calls:47,rows:11880,
    parts:[["Sensor de oxígeno","5 OR · patrón de falla nacional"],["Bujías","6 citas · 30 en existencia"]],jit:"5 casos de sensor de oxígeno ligados a la alerta de calidad nacional. Reservar 6 sensores y abrir el caso de garantía con pre-validación."},
-  {id:"TIJ-07",name:"Frontera Motors",city:"Tijuana",region:"Norte",dms:"AutoGestión Web",conn:"Híbrido",sync:6,status:"ok",citas:28,or:40,det:1,occ:72,nps:73,leads:91,rows:10340,
+  {id:"TIJ-07",name:"Frontera Motors",city:"Tijuana",region:"Norte",dms:"AutoGestión Web",conn:"Híbrido",sync:6,status:"ok",citas:28,or:40,det:1,occ:72,nps:73,leads:91,calls:39,rows:10340,
    parts:[["Bomba de agua","2 en existencia · sin demanda local"],["Llantas 265/70R17","4 citas"]],jit:"Traspasar 2 bombas de agua a Motores Regios, donde hay 3 autos detenidos."},
-  {id:"PUE-08",name:"Puebla Car Center",city:"Puebla",region:"Centro",dms:"Terminal AS/400",conn:"Computer use",sync:45,status:"ok",citas:25,or:42,det:3,occ:79,nps:68,leads:76,rows:9120,
-   parts:[["Módulo de transmisión","1 OR · 12 días detenido"],["Rótula","2 OR"]],jit:"Un vehículo lleva 12 días detenido por un módulo de transmisión. Escalar a partes de la marca con prioridad."},
-  {id:"VER-09",name:"Golfo Automotriz",city:"Veracruz",region:"Sureste",dms:"AutoGestión Web",conn:"Híbrido",sync:9,status:"ok",citas:19,or:30,det:2,occ:67,nps:71,leads:85,rows:6870,
+  {id:"PUE-08",name:"Puebla Car Center",city:"Puebla",region:"Centro",dms:"Terminal AS/400",conn:"Computer use",sync:45,status:"ok",citas:25,or:42,det:3,occ:79,nps:68,leads:76,calls:36,rows:9120,
+   parts:[["Módulo de transmisión","1 OR · 12 días detenido"],["Rótula","2 OR"]],jit:"Un vehículo lleva 12 días detenido por un módulo de transmisión; el cliente llamó 3 veces. Escalar a partes de la marca con prioridad."},
+  {id:"VER-09",name:"Golfo Automotriz",city:"Veracruz",region:"Sureste",dms:"AutoGestión Web",conn:"Híbrido",sync:9,status:"ok",citas:19,or:30,det:2,occ:67,nps:71,leads:85,calls:28,rows:6870,
    parts:[["Compresor de A/C","2 OR · 1 en existencia"],["Anticorrosivo","campaña costera"]],jit:"Mismo patrón de A/C que en Mérida. Pedido regional consolidado con Peninsular Motors."},
-  {id:"HMO-10",name:"Sonora Autos",city:"Hermosillo",region:"Norte",dms:"Sistema propio",conn:"Computer use",sync:132,status:"bad",citas:17,or:26,det:2,occ:58,nps:64,leads:61,rows:4220,
-   parts:[["Filtro de aire","calor extremo · demanda alta"],["Batería 60Ah","3 citas"]],jit:"Conector en reintento: el DMS pidió cambio de contraseña. Se avisó al dealer; los datos de hace 2 h siguen disponibles."},
+  {id:"HMO-10",name:"Sonora Autos",city:"Hermosillo",region:"Norte",dms:"Sistema propio",conn:"Computer use",sync:132,status:"bad",citas:17,or:26,det:2,occ:58,nps:64,leads:61,calls:22,rows:4220,
+   parts:[["Filtro de aire","calor extremo · demanda alta"],["Batería 60Ah","3 citas"]],jit:"Conector en reintento: el DMS pidió cambio de contraseña. Se avisó al dealer; los datos de hace 2 h siguen disponibles y la voz sigue operando."},
 ];
 
 const fmt = n => n.toLocaleString("es-MX");
 const syncTxt = m => m < 60 ? `hace ${m} min` : `hace ${Math.floor(m/60)} h ${m%60} min`;
 const connCls = c => c==="API" ? "ct-api" : c==="Híbrido" ? "ct-hy" : "ct-cu";
-const statusPill = s => s==="ok" ? '<span class="pill p-ok">OK</span>' : s==="warn" ? '<span class="pill p-warn">Lento</span>' : '<span class="pill p-bad">Reintento</span>';
+const connShort = c => c==="API" ? "API" : c==="Híbrido" ? "HÍBRIDO" : "COMPUTER USE";
+const statusPill = s => s==="ok" ? '<span class="pill p-ok">OK</span>' : s==="warn" ? '<span class="pill p-warn">LENTO</span>' : '<span class="pill p-bad">REINTENTO</span>';
 let fRegion = "Todas", fConn = "Todos", selected = "MTY-02";
-
-function filtered(){ return DEALERS.filter(d => (fRegion==="Todas"||d.region===fRegion) && (fConn==="Todos"||d.conn===fConn)); }
+const filtered = () => DEALERS.filter(d => (fRegion==="Todas"||d.region===fRegion) && (fConn==="Todos"||d.conn===fConn));
 
 function renderKpis(list){
   const sum = k => list.reduce((a,d)=>a+d[k],0);
   const avg = k => list.length ? Math.round(sum(k)/list.length) : 0;
   const ok = list.filter(d=>d.status==="ok").length;
   document.getElementById("kpis").innerHTML = [
-    ["Dealers conectados", `${ok}/${list.length}`, list.length && ok===list.length ? "todos sincronizados" : "1 en reintento", ok===list.length?"":"bad"],
-    ["Citas hoy", fmt(sum("citas")), "+11 % vs. semana pasada", ""],
-    ["OR abiertas", fmt(sum("or")), "en todos los DMS", ""],
-    ["Detenidos por parte", fmt(sum("det")), "requieren pedido JIT", "bad"],
-    ["Ocupación de taller", avg("occ")+"%", "promedio", ""],
-    ["Leads < 15 min", avg("leads")+"%", "meta 90 %", avg("leads")>=90?"":"bad"],
-  ].map(([l,v,s,c])=>`<div class="kpi"><small>${l}</small><div>${v}</div><em class="${c}">${s}</em></div>`).join("");
+    ["Dealers", `${ok}/${list.length}`, ok===list.length ? "todos sincronizados" : "con incidencias", ok===list.length?"":"bad",""],
+    ["Citas hoy", fmt(sum("citas")), "+11 % vs. semana pasada", "",""],
+    ["OR abiertas", fmt(sum("or")), "en todos los DMS", "",""],
+    ["Detenidos x parte", fmt(sum("det")), "requieren pedido JIT", "bad",""],
+    ["Ocupación", avg("occ")+"%", "promedio de taller", "",""],
+    ["Leads < 15 min", avg("leads")+"%", "meta 90 %", avg("leads")>=90?"":"bad",""],
+    ["Llamadas IA", fmt(sum("calls")), "0 sin contestar", "","hlk"],
+  ].map(([l,v,s,c,x])=>`<div class="kpi ${x}"><small>${l}</small><div>${v}</div><em class="${c}">${s}</em></div>`).join("");
 }
 
 function renderRows(list){
-  document.getElementById("cnt").textContent = `${list.length} de ${DEALERS.length}`;
+  document.getElementById("cnt").textContent = `${list.length} DE ${DEALERS.length}`;
   document.getElementById("rows").innerHTML = list.map(d=>`
     <tr data-id="${d.id}" class="${d.id===selected?'sel':''}">
       <td class="dn"><b>${d.name}</b><span>${d.city} · ${d.id}</span></td>
       <td>${d.dms}</td>
-      <td><span class="ct ${connCls(d.conn)}">${d.conn}</span></td>
-      <td>${statusPill(d.status)} <span style="color:var(--dim);font-size:.76rem">${syncTxt(d.sync)}</span></td>
-      <td><b>${d.citas}</b></td>
-      <td>${d.or}</td>
-      <td style="color:${d.det>=4?'var(--red)':'inherit'};font-weight:${d.det>=4?800:400}">${d.det}</td>
+      <td><span class="ct ${connCls(d.conn)}">${connShort(d.conn)}</span></td>
+      <td>${statusPill(d.status)} <span style="color:var(--dim);font-size:.74rem">${syncTxt(d.sync)}</span></td>
+      <td><b>${d.citas}</b></td><td>${d.or}</td>
+      <td style="color:${d.det>=4?'var(--red)':'inherit'};font-weight:${d.det>=4?700:400}">${d.det}</td>
       <td><span class="mini"><i style="width:${d.occ}%"></i></span>${d.occ}%</td>
-      <td>${d.nps}</td>
-    </tr>`).join("") || `<tr><td colspan="9" style="color:var(--dim)">Sin dealers para este filtro.</td></tr>`;
+      <td>${d.calls}</td><td>${d.nps}</td>
+    </tr>`).join("") || `<tr><td colspan="10" style="color:var(--dim)">Sin dealers para este filtro.</td></tr>`;
   document.querySelectorAll("#rows tr[data-id]").forEach(tr=>tr.onclick=()=>{ selected=tr.dataset.id; render(); });
 }
 
 function seeded(id){ let h=0; for(const c of id) h=(h*31+c.charCodeAt(0))>>>0; return ()=>{ h=(h*1103515245+12345)>>>0; return (h>>>8)/16777216; }; }
 
 function renderDetail(){
-  const d = DEALERS.find(x=>x.id===selected);
-  const rnd = seeded(d.id);
-  const days = Array.from({length:14},(_,i)=>Math.round(d.citas*(0.7+rnd()*0.5)));
-  const max = Math.max(...days), W=360, H=100, bw=W/14;
-  const bars = days.map((v,i)=>{const h=(v/max)*(H-18);return `<rect x="${i*bw+3}" y="${H-h}" width="${bw-6}" height="${h}" rx="3" fill="${i===13?'#f6821f':'#ffd9b5'}"/>`}).join("");
+  const d = DEALERS.find(x=>x.id===selected); const rnd = seeded(d.id);
+  const days = Array.from({length:14},()=>Math.round(d.citas*(0.7+rnd()*0.5)));
+  const max = Math.max(...days), W=360, H=96, bw=W/14;
+  const bars = days.map((v,i)=>{const h=(v/max)*(H-14);return `<rect x="${i*bw+2}" y="${H-h}" width="${bw-4}" height="${h}" fill="${i===13?'#f3fb09':'#003ffe'}" ${i===13?'stroke="#141414" stroke-width="1"':''}/>`}).join("");
   const how = d.conn==="API" ? "API REST del DMS, sincronización incremental"
             : d.conn==="Híbrido" ? "API para inventario y partes; computer use para agenda y reportes de taller"
             : "Agente de computer use con usuario dedicado, en escritorio virtual aislado";
   document.getElementById("detail").innerHTML = `
-    <div class="panel-h">Detalle del dealer <small>${d.id}</small></div>
+    <div class="ph">Detalle del dealer <small>${d.id}</small></div>
     <div class="detail">
       <h4>${d.name}</h4>
-      <div class="meta">${d.city} · ${d.dms} · <span class="ct ${connCls(d.conn)}">${d.conn}</span></div>
-      <div class="dgrid">
-        <div><small>Registros hoy</small><b>${fmt(d.rows)}</b></div>
-        <div><small>Leads &lt; 15 min</small><b>${d.leads}%</b></div>
-        <div><small>NPS servicio</small><b>${d.nps}</b></div>
-      </div>
-      <div class="sub">Citas, últimos 14 días</div>
+      <div class="meta">${d.city} · ${d.dms} <span class="ct ${connCls(d.conn)}">${connShort(d.conn)}</span><span class="ct ct-allo">VOZ · ALLO</span></div>
+      <div class="dg"><div><small>Registros hoy</small><b>${fmt(d.rows)}</b></div><div><small>Llamadas IA</small><b>${d.calls}</b></div><div><small>Leads &lt;15'</small><b>${d.leads}%</b></div><div><small>NPS</small><b>${d.nps}</b></div></div>
+      <div class="sub">Citas · últimos 14 días</div>
       <div class="chart"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${bars}</svg></div>
       <div class="sub">Cómo se conecta</div>
-      <div style="font-size:.84rem;color:var(--ink2)">${how}. Última sincronización ${syncTxt(d.sync)}.</div>
+      <div style="font-size:.84rem">${how}. Última sincronización ${syncTxt(d.sync)}.</div>
       <div class="sub">Partes en riesgo</div>
-      <div class="parts">${d.parts.map(([p,s])=>`<div class="part"><div><b>${p}</b><span>${s}</span></div></div>`).join("")}</div>
+      <div class="parts">${d.parts.map(([p,s])=>`<div class="part"><b>${p}</b><span>${s}</span></div>`).join("")}</div>
       <div class="jit"><b>Recomendación del cerebro:</b> ${d.jit}</div>
     </div>`;
 }
 
-function render(){ const l=filtered(); if(!l.find(d=>d.id===selected) && l.length) selected=l[0].id; renderKpis(l); renderRows(l); renderDetail(); }
-
-function bindSeg(id, set){
-  document.querySelectorAll(`#${id} button`).forEach(b=>b.onclick=()=>{
-    document.querySelectorAll(`#${id} button`).forEach(x=>x.classList.remove("on")); b.classList.add("on"); set(b.dataset.v); render();
-  });
+function renderHeat(list){
+  const el = document.getElementById("hm"); let html = "<span></span>";
+  for(let h=8;h<20;h++) html += `<span style="text-align:center;font-family:'JetBrains Mono';font-size:.6rem">${String(h).padStart(2,"0")}</span>`;
+  list.forEach(d=>{ const rnd=seeded(d.id+"h"); html += `<span>${d.name}</span>`;
+    for(let h=8;h<20;h++){ const base = (h<=10)||(h>=16&&h<=17) ? .55 : .25; const v = Math.min(1, base*(d.occ/75) + rnd()*.35);
+      const c = v>.9 ? "#f3fb09" : v>.65 ? "#003ffe" : v>.4 ? "#6e93ff" : "#dfe7ff";
+      html += `<i style="background:${c}${v>.9?';outline:1px solid #141414;outline-offset:-1px':''}" title="${d.name} ${h}:00"></i>`; } });
+  el.innerHTML = html;
 }
-bindSeg("fRegion", v=>fRegion=v);
-bindSeg("fConn", v=>fConn=v);
-render();
 
-// live clock + sync ticking
+function render(){ const l=filtered(); if(!l.find(d=>d.id===selected) && l.length) selected=l[0].id; renderKpis(l); renderRows(l); renderDetail(); renderHeat(l); }
+function bindSeg(id,set){ document.querySelectorAll(`#${id} button`).forEach(b=>b.onclick=()=>{ document.querySelectorAll(`#${id} button`).forEach(x=>x.classList.remove("on")); b.classList.add("on"); set(b.dataset.v); render(); }); }
+bindSeg("fRegion", v=>fRegion=v); bindSeg("fConn", v=>fConn=v); render();
+
+const hhmm = (s) => new Date().toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",second:s?"2-digit":undefined,hour12:false});
 setInterval(()=>{
   DEALERS.forEach(d=>{ if(d.status!=="bad"){ d.sync = d.sync>=(d.conn==="API"?3:60) ? 0 : d.sync+1; } else d.sync++; });
-  const t = new Date(); document.getElementById("clock").textContent = "Sincronizado · " + t.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",hour12:false});
-  render();
+  if(Math.random()<.5){ DEALERS[Math.floor(Math.random()*DEALERS.length)].calls++; }
+  document.getElementById("clock").textContent = "SINCRONIZADO · " + hhmm(false);
+  const l=filtered(); renderKpis(l); renderRows(l);
 }, 6000);
 
-// activity feed
 const EVENTS = [
-  d=>`<b>${d.name}</b> · reporte de órdenes descargado (${60+Math.floor(Math.random()*140)} filas)`,
-  d=>`<b>${d.name}</b> · existencias de partes actualizadas`,
-  d=>`<b>${d.name}</b> · cita capturada en el DMS, folio CT-${55000+Math.floor(Math.random()*999)}`,
-  d=>`<b>${d.name}</b> · ${d.conn==="API"?"webhook recibido: OR cerrada":"pantalla de agenda leída por visión"}`,
-  d=>`<b>${d.name}</b> · normalizado a Rosetta Schema y enviado al data lake`,
-  d=>`<b>${d.name}</b> · inventario de unidades verificado (${10+Math.floor(Math.random()*40)} unidades)`,
+  [d=>d.conn==="API"?"API":"CU", d=>`<b>${d.name}</b> · reporte de órdenes descargado (${60+Math.floor(Math.random()*140)} filas)`],
+  [d=>d.conn==="API"?"API":"CU", d=>`<b>${d.name}</b> · existencias de partes actualizadas`],
+  [()=>"VOZ", d=>`<b>${d.name}</b> · llamada atendida por IA, cita agendada (folio CT-${55000+Math.floor(Math.random()*999)})`],
+  [()=>"VOZ", d=>`<b>${d.name}</b> · llamada perdida respondida por SMS al instante`],
+  [()=>"VOZ", d=>`<b>${d.name}</b> · resumen de llamada guardado en el historial del VIN`],
+  [d=>d.conn==="API"?"API":"CU", d=>`<b>${d.name}</b> · normalizado a Rosetta Schema y enviado al data lake`],
+  [()=>"VOZ", d=>`<b>${d.name}</b> · llamada saliente: "su auto está listo"`],
 ];
 const feed = document.getElementById("feed");
 function pushEvent(){
-  const d = DEALERS[Math.floor(Math.random()*DEALERS.length)];
+  const d = DEALERS[Math.floor(Math.random()*DEALERS.length)]; const [tg,tx] = EVENTS[Math.floor(Math.random()*EVENTS.length)]; const t=tg(d);
+  const cls = t==="VOZ" ? "ct-allo" : t==="API" ? "ct-api" : "ct-cu";
   const e = document.createElement("div"); e.className="ev";
-  const t = new Date().toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});
-  e.innerHTML = `<time>${t}</time><span class="ct ${connCls(d.conn)}">${d.conn==="Computer use"?"CU":d.conn==="Híbrido"?"HÍB":"API"}</span><p>${EVENTS[Math.floor(Math.random()*EVENTS.length)](d)}</p>`;
+  e.innerHTML = `<time>${hhmm(true)}</time><span class="ct ${cls}">${t}</span><p>${tx(d)}</p>`;
   feed.prepend(e); while(feed.children.length>12) feed.lastChild.remove();
 }
-for(let i=0;i<7;i++) pushEvent();
-setInterval(pushEvent, 2200);
+for(let i=0;i<8;i++) pushEvent(); setInterval(pushEvent, 2200);
 
-// ask the brain (canned answers)
 const QA = [
   ["¿Qué dealers tienen más autos detenidos por partes?", ()=>{ const s=[...DEALERS].sort((a,b)=>b.det-a.det).slice(0,3); return `<b>Top 3 con autos detenidos por partes:</b><ol>${s.map(d=>`<li>${d.name} (${d.city}): ${d.det} autos. ${d.parts[0][0]}.</li>`).join("")}</ol><p style="margin-top:8px">Sugerencia: traspasar 2 bombas de agua de Frontera Motors a Motores Regios libera 2 autos hoy.</p>`; }],
-  ["¿Hay algún patrón de falla emergente?", ()=>`<b>Sí, dos patrones:</b><ol><li>Sensor de oxígeno en SUV 2024: 14 casos en 6 dealers en 7 días (Queretana de Autos concentra 5).</li><li>Compresor de A/C en el Sureste: un 38 % por encima de lo normal (Mérida y Veracruz).</li></ol><p style="margin-top:8px">Se abrió una alerta de calidad y se sugiere un pedido regional JIT.</p>`],
-  ["¿Qué dealers incumplen el SLA de leads?", ()=>{ const s=DEALERS.filter(d=>d.leads<80).sort((a,b)=>a.leads-b.leads); return `<b>${s.length} dealers por debajo del 80 %:</b><ol>${s.map(d=>`<li>${d.name}: ${d.leads}% de leads contactados en menos de 15 min</li>`).join("")}</ol><p style="margin-top:8px">La reasignación automática está activa después de 60 minutos.</p>`; }],
-  ["¿Dónde hay capacidad de taller esta semana?", ()=>{ const s=[...DEALERS].sort((a,b)=>a.occ-b.occ).slice(0,3); return `<b>Dealers con más capacidad libre:</b><ol>${s.map(d=>`<li>${d.name}: ${d.occ}% de ocupación</li>`).join("")}</ol><p style="margin-top:8px">Recomendación: dirigir ahí las campañas de recall y mantenimiento por WhatsApp.</p>`; }],
+  ["¿De qué se quejan los clientes por teléfono esta semana?", ()=>`<b>Temas principales en los resúmenes de llamadas:</b><ol><li>Aire acondicionado que no enfría: 9 menciones en el Sureste.</li><li>Seguimiento de un auto detenido: 3 llamadas del mismo cliente en Puebla Car Center.</li><li>Precio del servicio de 40 mil km: 14 menciones, sobre todo en el Norte.</li></ol>`],
+  ["¿Hay algún patrón de falla emergente?", ()=>`<b>Sí, dos patrones:</b><ol><li>Sensor de oxígeno en SUV 2024: 14 casos en 6 dealers en 7 días.</li><li>Compresor de A/C en el Sureste: un 38 % por encima de lo normal, confirmado también por llamadas.</li></ol>`],
+  ["¿Qué dealers incumplen el SLA de leads?", ()=>{ const s=DEALERS.filter(d=>d.leads<80).sort((a,b)=>a.leads-b.leads); return `<b>${s.length} dealers por debajo del 80 %:</b><ol>${s.map(d=>`<li>${d.name}: ${d.leads}%</li>`).join("")}</ol><p style="margin-top:8px">La IA de voz ya llama a los leads vencidos en esos dealers.</p>`; }],
 ];
 const qs = document.getElementById("qs"), answer = document.getElementById("answer");
 QA.forEach(([q,a],i)=>{ const b=document.createElement("button"); b.textContent=q; b.onclick=()=>{ qs.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); answer.innerHTML='<span style="color:var(--dim)">Consultando los 10 dealers…</span>'; setTimeout(()=>answer.innerHTML=a(),550); }; qs.appendChild(b); if(i===0){ b.classList.add("on"); answer.innerHTML=a(); } });
 
-// MCP traffic log
 const MCP = [
-  ['buscar_disponibilidad','{cp:"64000", servicio:"20k"}','MTY-02 · 2 horarios'],
-  ['agendar_cita','{dealer:"LEO-05", slot:"09:15"}','folio CT-55907'],
-  ['estatus_orden','{orden:"OR-88213"}','"espera de pieza"'],
-  ['existencia_parte','{parte:"BK2Z-9601-A", radio_km:150}','3 dealers con existencia'],
-  ['inventario_unidades','{modelo:"pickup", color:"gris"}','7 unidades'],
-  ['historial_vin','{vin:"…A04821"}','4 servicios · 1 campaña'],
+  ['allo-recepcionista','buscar_disponibilidad','{dealer:"MTY-02", servicio:"20k"}','2 horarios'],
+  ['allo-recepcionista','agendar_cita','{dealer:"LEO-05", slot:"09:15"}','folio CT-55907'],
+  ['whatsapp-bot','estatus_orden','{orden:"OR-88213"}','"espera de pieza"'],
+  ['callcenter-ia','existencia_parte','{parte:"BK2Z-9601-A", radio_km:150}','3 dealers'],
+  ['app-marca','inventario_unidades','{modelo:"pickup", color:"gris"}','7 unidades'],
+  ['allo-recepcionista','historial_vin','{vin:"…A04821"}','4 servicios · 1 campaña'],
 ];
 const mcp = document.getElementById("mcp");
 function pushMcp(){
-  const [t,a,r] = MCP[Math.floor(Math.random()*MCP.length)];
-  const src = ["whatsapp-bot","callcenter-ia","app-marca"][Math.floor(Math.random()*3)];
-  const el = document.createElement("div");
-  el.innerHTML = `<span class="c">${src} →</span> <span class="k">${t}</span>${a}<br><span class="s">  ← ${r}</span> <span class="c">${120+Math.floor(Math.random()*900)} ms</span>`;
-  el.style.marginBottom="8px"; mcp.prepend(el); while(mcp.children.length>8) mcp.lastChild.remove();
+  const [src,t,a,r] = MCP[Math.floor(Math.random()*MCP.length)];
+  const el = document.createElement("div"); el.style.marginBottom="8px";
+  el.innerHTML = `<span class="c">${src} &gt;</span> <span class="k">${t}</span>${a}<br><span class="s">  &lt; ${r}</span> <span class="c">${120+Math.floor(Math.random()*900)} ms</span>`;
+  mcp.prepend(el); while(mcp.children.length>8) mcp.lastChild.remove();
 }
-for(let i=0;i<5;i++) pushMcp();
-setInterval(pushMcp, 2900);
+for(let i=0;i<5;i++) pushMcp(); setInterval(pushMcp, 2900);
 </script>
 </body>
 </html>
