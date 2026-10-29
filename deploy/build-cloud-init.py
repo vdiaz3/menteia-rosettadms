@@ -8,6 +8,8 @@ buf = io.BytesIO()
 with tarfile.open(fileobj=buf, mode="w:gz") as t:
     for f in sorted(os.listdir(os.path.join(root, "site"))):
         path = os.path.join(root, "site", f)
+        if os.path.isdir(path):
+            continue  # large media (site/intro) is too big for user_data and is hosted separately
         if f.endswith(".html"):
             # user_data is capped at 64 KiB, so ship the page without indentation
             html = re.sub(r"\n[ \t]+", "\n", open(path, encoding="utf-8").read())

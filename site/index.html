@@ -431,6 +431,14 @@ footer a:hover{color:var(--y)}
 .foot-big{font-family:"Titillium Web",sans-serif;font-weight:900;letter-spacing:-.03em;text-transform:uppercase;font-size:clamp(3rem,11.5vw,11.5rem);line-height:.9;color:#222;margin-top:40px;white-space:nowrap;overflow:hidden}
 .foot-b{border-top:1px solid #333;padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;font-family:"JetBrains Mono"}
 
+/* intro overlay */
+#intro{position:fixed;inset:0;z-index:200;background:var(--ink);display:none;align-items:center;justify-content:center;transition:opacity .5s}
+#intro.on{display:flex}
+#intro.out{opacity:0}
+#intro video{width:100%;height:100%;object-fit:contain;background:var(--ink)}
+#intro .skip{position:absolute;right:24px;bottom:30px}
+#intro .prog{position:absolute;left:0;bottom:0;height:5px;background:var(--y);width:0}
+body.intro-open{overflow:hidden}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
 .reveal.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.ln{opacity:1;transform:none}}
@@ -471,6 +479,12 @@ footer a:hover{color:var(--y)}
   <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
 </svg>
 
+<div id="intro" role="dialog" aria-label="Video de introducción de RosettaDMS">
+  <video id="introVideo" muted playsinline preload="auto"></video>
+  <button class="btn btn-y skip" id="introSkip" type="button">Saltar intro <svg class="ico"><use href="#i-arrow"/></svg></button>
+  <div class="prog" id="introProg"></div>
+</div>
+
 <div class="topbar"><div class="wrap">Programa piloto: 4 dealers con DMS distintos, 30 días, sin costo para el dealer. <a href="#contacto">Solicitar piloto</a></div></div>
 
 <nav>
@@ -501,6 +515,7 @@ footer a:hover{color:var(--y)}
         <div class="hero-ctas">
           <a href="#demo" class="btn btn-y">Ver la demo <svg class="ico"><use href="#i-arrow"/></svg></a>
           <a href="#como" class="btn btn-wl">Cómo funciona</a>
+          <button class="btn btn-wl" id="introReplay" type="button"><svg class="ico" viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><polygon points="6 4 20 12 6 20 6 4"/></svg>Ver intro (30 s)</button>
         </div>
       </div>
       <div class="trio">
@@ -1019,6 +1034,31 @@ document.querySelectorAll(".frame[data-yt]").forEach(fr=>fr.addEventListener("cl
     setTimeout(next, c==="ai"?2600:1700);
   }
   next();
+})();
+
+// intro video: plays on load, can be skipped or replayed; closes itself if the video can't load
+const INTRO_BASE = "intro/";
+(function(){
+  const box = document.getElementById("intro"), v = document.getElementById("introVideo"), prog = document.getElementById("introProg");
+  v.poster = INTRO_BASE + "intro-poster.jpg";
+  v.innerHTML = `<source src="${INTRO_BASE}intro-720.webm" type="video/webm"><source src="${INTRO_BASE}intro-720.mp4" type="video/mp4">`;
+  function close(){
+    if(!box.classList.contains("on")) return;
+    v.pause(); box.classList.add("out"); document.body.classList.remove("intro-open");
+    setTimeout(()=>box.classList.remove("on","out"), 500);
+  }
+  function open(){
+    box.classList.remove("out"); box.classList.add("on"); document.body.classList.add("intro-open");
+    v.currentTime = 0; prog.style.width = "0";
+    v.play().catch(close);
+  }
+  v.addEventListener("timeupdate", ()=>{ if(v.duration) prog.style.width = (v.currentTime/v.duration*100)+"%"; });
+  v.addEventListener("ended", close);
+  v.querySelector("source:last-child").addEventListener("error", close);
+  document.getElementById("introSkip").onclick = close;
+  document.getElementById("introReplay").onclick = open;
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") close(); });
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches) open();
 })();
 
 /* ---------- DEMO: fictional dealer network ---------- */
