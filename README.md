@@ -2,7 +2,7 @@
 
 La piedra Rosetta de los DMS automotrices: conecta a una marca con todos sus dealers sin importar el DMS que usen, sin APIs, sin modificar software legado y sin costo para el dealer.
 
-- **Sitio:** https://rosettadms.menteia.com (droplet `rosettadms-web-4`, IP reservada 45.55.123.185, nyc3)
+- **Sitio:** https://rosettadms.menteia.com (droplet `rosettadms-web-5`, IP reservada 45.55.123.185, nyc3)
 - **Visión y arquitectura:** [docs/arquitectura.md](docs/arquitectura.md)
 
 ## Estructura
