@@ -1,13 +1,22 @@
 """Builds a self-contained cloud-init (site + nginx + auto-HTTPS) for a fresh droplet."""
-import base64, io, os, tarfile
+import base64, io, os, re, tarfile
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 b64 = lambda p: base64.b64encode(open(os.path.join(root, p), "rb").read()).decode()
 
 buf = io.BytesIO()
 with tarfile.open(fileobj=buf, mode="w:gz") as t:
-    for f in os.listdir(os.path.join(root, "site")):
-        t.add(os.path.join(root, "site", f), arcname=f)
+    for f in sorted(os.listdir(os.path.join(root, "site"))):
+        path = os.path.join(root, "site", f)
+        if f.endswith(".html"):
+            # user_data is capped at 64 KiB, so ship the page without indentation
+            html = re.sub(r"\n[ \t]+", "\n", open(path, encoding="utf-8").read())
+            html = re.sub(r"\s*([{};])\s*", r"\1", html.split("</style>")[0]) + "</style>" + html.split("</style>", 1)[1]
+            data = html.encode()
+            info = tarfile.TarInfo(f); info.size = len(data); info.mode = 0o644
+            t.addfile(info, io.BytesIO(data))
+        else:
+            t.add(path, arcname=f)
 site = base64.b64encode(buf.getvalue()).decode()
 
 print(f"""#cloud-config
