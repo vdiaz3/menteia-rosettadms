@@ -1,33 +1,17 @@
-"""Builds a self-contained cloud-init (site + nginx + auto-HTTPS) for a fresh droplet."""
-import base64, io, lzma, os, re, tarfile
+"""Builds the cloud-init for a fresh droplet: nginx + auto-HTTPS + a cron that pulls the site from GitHub.
+
+After the droplet exists, publishing is just `git push` to main; the droplet picks it up within 5 minutes,
+so droplets (and their Let's Encrypt certificates) don't need to be recreated for content changes.
+"""
+import base64, os
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 b64 = lambda p: base64.b64encode(open(os.path.join(root, p), "rb").read()).decode()
 
-buf = io.BytesIO()
-with tarfile.open(fileobj=buf, mode="w:xz", preset=9 | lzma.PRESET_EXTREME) as t:
-    for f in sorted(os.listdir(os.path.join(root, "site"))):
-        path = os.path.join(root, "site", f)
-        if os.path.isdir(path):
-            continue  # large media (site/intro) is too big for user_data and is hosted separately
-        if f.endswith(".html"):
-            # user_data is capped at 64 KiB, so ship the page without indentation
-            html = re.sub(r"\n[ \t]+", "\n", open(path, encoding="utf-8").read())
-            html = re.sub(r"\s*([{};])\s*", r"\1", html.split("</style>")[0]) + "</style>" + html.split("</style>", 1)[1]
-            data = html.encode()
-            info = tarfile.TarInfo(f); info.size = len(data); info.mode = 0o644
-            t.addfile(info, io.BytesIO(data))
-        else:
-            t.add(path, arcname=f)
-site = base64.b64encode(buf.getvalue()).decode()
-
 print(f"""#cloud-config
 package_update: true
-packages: [nginx, certbot, python3-certbot-nginx, ufw, dnsutils]
+packages: [nginx, certbot, python3-certbot-nginx, ufw, dnsutils, git]
 write_files:
-  - path: /root/site.txz
-    encoding: b64
-    content: {site}
   - path: /etc/nginx/sites-available/rosettadms
     encoding: b64
     content: {b64("deploy/nginx.conf")}
@@ -35,10 +19,17 @@ write_files:
     encoding: b64
     permissions: '0755'
     content: {b64("deploy/auto-https.sh")}
-  - path: /etc/cron.d/auto-https
-    content: "*/2 * * * * root /usr/local/bin/auto-https.sh >> /var/log/auto-https.log 2>&1\\n"
+  - path: /usr/local/bin/sync-site.sh
+    encoding: b64
+    permissions: '0755'
+    content: {b64("deploy/sync-site.sh")}
+  - path: /etc/cron.d/rosettadms
+    content: |
+      */2 * * * * root /usr/local/bin/auto-https.sh >> /var/log/auto-https.log 2>&1
+      */5 * * * * root /usr/local/bin/sync-site.sh >> /var/log/sync-site.log 2>&1
 runcmd:
-  - mkdir -p /var/www/rosettadms && tar xJf /root/site.txz -C /var/www/rosettadms
+  - /usr/local/bin/sync-site.sh
+  - rm -rf /var/www/rosettadms && ln -s /opt/rosettadms/site /var/www/rosettadms
   - rm -f /etc/nginx/sites-enabled/default
   - ln -sf /etc/nginx/sites-available/rosettadms /etc/nginx/sites-enabled/rosettadms
   - ufw allow OpenSSH && ufw allow 'Nginx Full' && ufw --force enable
