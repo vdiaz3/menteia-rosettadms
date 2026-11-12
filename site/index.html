@@ -449,6 +449,14 @@ footer a:hover{color:var(--y)}
 #intro .skip{position:absolute;right:20px;bottom:22px;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:10px 16px;font:600 .84rem "Inter Tight";cursor:pointer;z-index:2}
 #intro .prog{position:absolute;left:0;bottom:0;height:3px;background:var(--b);width:0;z-index:2}
 body.intro-open{overflow:hidden}
+/* intro video section */
+.vsec{background:var(--ink);color:#fff;padding:90px 0}
+.vsec .sec-head{margin-bottom:36px}
+.vsec .sec-head p{color:#bdbdbd}
+.vframe{position:relative;border:1.5px solid #333;border-radius:var(--r);overflow:hidden;background:#000;aspect-ratio:16/9}
+.vframe video{display:block;width:100%;height:100%;object-fit:cover}
+.vmeta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font-family:"JetBrains Mono";font-size:.72rem;letter-spacing:.06em;color:#8a8a8a}
+.vmeta a{color:var(--y)}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
 .reveal.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.ln{opacity:1;transform:none}}
@@ -506,6 +514,7 @@ body.intro-open{overflow:hidden}
   <div class="wrap">
     <a href="#" class="logo" aria-label="RosettaDMS inicio"><img src="logo-full.webp" alt="RosettaDMS" width="113" height="46"></a>
     <div class="nav-links">
+      <a href="#video">Video</a>
       <a href="#problema">Problema</a>
       <a href="#como">Cómo funciona</a>
       <a href="#funciones">Funciones</a>
@@ -580,6 +589,23 @@ body.intro-open{overflow:hidden}
     </div>
   </div>
 </header>
+
+<!-- VIDEO -->
+<section id="video" class="vsec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="label" style="color:var(--y)">00 · RosettaDMS en 30 segundos</div>
+      <h2>El reto, la solución y el cerebro central, en un video</h2>
+      <p>Cómo RosettaDMS conecta dealers con DMS distintos, sin APIs nuevas ni cambios en su software, y lo convierte en citas, partes a tiempo e inteligencia para toda la red.</p>
+    </div>
+    <div class="vframe reveal">
+      <video controls playsinline preload="metadata" poster="https://cdn.jsdelivr.net/gh/vdiaz3/menteia-rosettadms@main/media/intro-poster.jpg" aria-label="Video de presentación de RosettaDMS (30 segundos)">
+        <source src="https://cdn.jsdelivr.net/gh/vdiaz3/menteia-rosettadms@main/media/rosettadms-intro-30s.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vmeta"><span>VIDEO · 30 S · 1920×1080</span><a href="https://cdn.jsdelivr.net/gh/vdiaz3/menteia-rosettadms@main/media/rosettadms-intro-30s.mp4" target="_blank" rel="noopener">Abrir o descargar el video</a></div>
+  </div>
+</section>
 
 <!-- PROBLEMA -->
 <section id="problema" class="problem">
